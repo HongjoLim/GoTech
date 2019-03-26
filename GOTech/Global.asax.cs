@@ -11,9 +11,6 @@ namespace GOTech
     {
         protected void Application_Start()
         {
-            // Seed our data by using db initializer
-            //Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationObjectDbContext>());
-
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

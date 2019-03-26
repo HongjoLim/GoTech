@@ -166,8 +166,7 @@ namespace GOTech.Controllers
                     Address = model.Address,
                     City = model.City,
                     Province = model.Province,
-                    PostalCode = model.PostalCode,
-
+                    PostalCode = model.PostalCode
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -185,6 +184,9 @@ namespace GOTech.Controllers
                 }
                 AddErrors(result);
             }
+
+            // If failed, make sure the position list is available
+            ViewBag.Positions = new SelectList(_db.Positions, "PositionId", "Title", model.PositionId);
 
             // If we got this far, something failed, redisplay form
             return View(model);

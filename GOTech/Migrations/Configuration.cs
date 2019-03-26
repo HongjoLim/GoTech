@@ -17,11 +17,11 @@ namespace GOTech.Migrations
         protected override void Seed(ApplicationDbContext context)
         {
             context.Positions.AddOrUpdate(
-                new Position{ Title = "Developer"},
-                new Position { Title = "Salesman" },
-                new Position { Title = "Designer" },
-                new Position { Title = "Manager" }
-                );
+                 new Position { Title = "Developer" },
+                 new Position { Title = "Salesman" },
+                 new Position { Title = "Designer" },
+                 new Position { Title = "Manager" }
+                 );
         }
     }
 }

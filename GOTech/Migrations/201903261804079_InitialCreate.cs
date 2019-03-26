@@ -36,39 +36,36 @@ namespace GOTech.Migrations
                         Ongoing = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ProjectId);
-            
+
             CreateTable(
                 "dbo.AspNetUsers",
                 c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        FirstName = c.String(),
-                        LastName = c.String(),
-                        PositionId = c.Int(nullable: false),
-                        HiringDate = c.DateTime(nullable: false),
-                        Address = c.String(),
-                        City = c.String(),
-                        Province = c.String(),
-                        PostalCode = c.String(),
-                        Email = c.String(maxLength: 256),
-                        EmailConfirmed = c.Boolean(nullable: false),
-                        PasswordHash = c.String(),
-                        SecurityStamp = c.String(),
-                        PhoneNumber = c.String(),
-                        PhoneNumberConfirmed = c.Boolean(nullable: false),
-                        TwoFactorEnabled = c.Boolean(nullable: false),
-                        LockoutEndDateUtc = c.DateTime(),
-                        LockoutEnabled = c.Boolean(nullable: false),
-                        AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(nullable: false, maxLength: 256),
-                        Project_ProjectId = c.Int(),
-                    })
+                {
+                    Id = c.String(nullable: false, maxLength: 128),
+                    FirstName = c.String(),
+                    LastName = c.String(),
+                    PositionId = c.Int(nullable: false),
+                    HiringDate = c.DateTime(nullable: false),
+                    Address = c.String(),
+                    City = c.String(),
+                    Province = c.String(),
+                    PostalCode = c.String(),
+                    Email = c.String(maxLength: 256),
+                    EmailConfirmed = c.Boolean(nullable: false),
+                    PasswordHash = c.String(),
+                    SecurityStamp = c.String(),
+                    PhoneNumber = c.String(),
+                    PhoneNumberConfirmed = c.Boolean(nullable: false),
+                    TwoFactorEnabled = c.Boolean(nullable: false),
+                    LockoutEndDateUtc = c.DateTime(),
+                    LockoutEnabled = c.Boolean(nullable: false),
+                    AccessFailedCount = c.Int(nullable: false),
+                    UserName = c.String(nullable: false, maxLength: 256),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Positions", t => t.PositionId, cascadeDelete: true)
-                .ForeignKey("dbo.Projects", t => t.Project_ProjectId)
                 .Index(t => t.PositionId)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex")
-                .Index(t => t.Project_ProjectId);
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
             CreateTable(
                 "dbo.AspNetUserClaims",
@@ -135,7 +132,6 @@ namespace GOTech.Migrations
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Reviews", "ProjectId", "dbo.Projects");
-            DropForeignKey("dbo.AspNetUsers", "Project_ProjectId", "dbo.Projects");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUsers", "PositionId", "dbo.Positions");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
