@@ -108,6 +108,7 @@ C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\bin\Microsoft.Owin.Security.OAuth
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\bin\System.Diagnostics.DiagnosticSource.xml
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Debug\GOTech.csprojAssemblyReference.cache
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Debug\GOTech.Migrations.InitialCreate.resources
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Debug\GOTech.csproj.GenerateResource.cache
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Debug\GOTech.csproj.CoreCompileInputs.cache
