@@ -20,6 +20,11 @@ namespace GOTech.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        private DbSet<Position> Positions { get; set; }
+        private DbSet<Employee> Employees { get; set; }
+        private DbSet<Project> Projects { get; set; }
+        private DbSet<Review> Reviews { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

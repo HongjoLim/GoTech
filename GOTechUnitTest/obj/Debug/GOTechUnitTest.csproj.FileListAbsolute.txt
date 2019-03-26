@@ -1,0 +1,14 @@
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\GOTechUnitTest.dll
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\GOTechUnitTest.pdb
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\obj\Debug\GOTechUnitTest.csprojAssemblyReference.cache
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\obj\Debug\GOTechUnitTest.csproj.CoreCompileInputs.cache
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\obj\Debug\GOTechUnitTest.csproj.CopyComplete
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\obj\Debug\GOTechUnitTest.dll
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\obj\Debug\GOTechUnitTest.pdb
