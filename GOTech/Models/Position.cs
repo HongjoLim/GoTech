@@ -1,14 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿/* 
+ * Name: Jo Lim
+ * Date: Mar 25, 2019
+ * Last Modified: Mar 25, 2019
+ * */
+
+using System.ComponentModel.DataAnnotations;
 
 namespace GOTech.Models
 {
     public class Position
     {
         // Primary key
-        public virtual int Id { get; set; }
+        [Key]
+        public virtual int PositionId { get; set; }
         public virtual string Title { get; set; }
     }
 }

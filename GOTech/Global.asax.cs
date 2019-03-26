@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using GOTech.Models;
+using System.Data.Entity;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -13,6 +11,9 @@ namespace GOTech
     {
         protected void Application_Start()
         {
+            // Seed our data by using db initializer
+            //Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationObjectDbContext>());
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

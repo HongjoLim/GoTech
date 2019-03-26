@@ -1,14 +1,19 @@
-﻿using System;
+﻿/* 
+ * Name: Jo Lim
+ * Date: Mar 25, 2019
+ * Last Modified: Mar 25, 2019
+ * */
+
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GOTech.Models
 {
     public class Project
     {
-        public virtual int ID { get; set; }
+        [Key]
+        public virtual int ProjectId { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "{0} must be between 2 to 50 characters")]
@@ -19,7 +24,7 @@ namespace GOTech.Models
         public virtual string Description { get; set; }
         public virtual bool Ongoing { get; set; }
 
-        public List<Employee> Employees { get; set; }
+        public List<ApplicationUser> Employees { get; set; }
         public List<Review> Reviews { get; set; }
 
     }
@@ -30,7 +35,8 @@ namespace GOTech.Models
 
     public class EmployeeProjectJoin
     {
-        public virtual int EmployeeId { get; set; }
+        public virtual int Id { get; set; }
+        public virtual int AspNetUserId { get; set; }
         public virtual int ProjectId { get; set; }
     
     }

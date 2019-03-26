@@ -1,4 +1,3 @@
-C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Debug\GOTech.csprojAssemblyReference.cache
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Debug\GOTech.csproj.CoreCompileInputs.cache
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\bin\GOTech.dll.config
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\bin\GOTech.dll
@@ -113,3 +112,5 @@ C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\bin\Microsoft.CodeDom.Providers.D
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Debug\GOTech.csproj.CopyComplete
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Debug\GOTech.dll
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Debug\GOTech.pdb
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Debug\GOTech.Migrations.InitialCreate.resources
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Debug\GOTech.csproj.GenerateResource.cache

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GOTech.Models
@@ -79,6 +80,39 @@ namespace GOTech.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        #region Customizing ApplicationUser class by adding this fileds 
+        [Required(ErrorMessage = "{0} is required")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "{0} must be between 2 to 50 characters")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "{0} is required")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "{0} must be between 2 to 50 characters")]
+        public string LastName { get; set; }
+
+        // Foreign key, this field will tell whether the user is a Manager Developer, Designer, or Salesman
+        public int PositionId { get; set; }
+        public Position Position { get; set; }
+
+        public DateTime HiringDate { get; set; }
+
+        [Required(ErrorMessage = "{0} is required")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "{0} must be between 2 to 50 characters")]
+        public string Address { get; set; }
+
+        [Required(ErrorMessage = "{0} is required")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "{0} must be between 2 to 50 characters")]
+        public string City { get; set; }
+
+        [Required(ErrorMessage = "{0} is required")]
+        [StringLength(5, MinimumLength = 2, ErrorMessage = "{0} must be between 2 to 5 characters")]
+        public string Province { get; set; }
+
+        [Required(ErrorMessage = "{0} is required")]
+        [StringLength(10, MinimumLength = 2, ErrorMessage = "{0} must be between 2 to 10 characters")]
+        public string PostalCode { get; set; }
+
+        #endregion
     }
 
     public class ResetPasswordViewModel

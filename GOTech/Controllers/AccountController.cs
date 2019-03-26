@@ -17,6 +17,7 @@ namespace GOTech.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -139,6 +140,8 @@ namespace GOTech.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            // Add a SelectList to choose a position from
+            ViewBag.Positions = new SelectList(_db.Positions , "PositionId", "Title");
             return View();
         }
 
@@ -151,7 +154,22 @@ namespace GOTech.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    // This block of code adds our customized fields for an ApplicationUser
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    PositionId = model.PositionId,
+                    HiringDate = DateTime.Now,
+                    Address = model.Address,
+                    City = model.City,
+                    Province = model.Province,
+                    PostalCode = model.PostalCode,
+
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -1,4 +1,4 @@
-﻿using System.Data.Entity;
+﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -13,26 +13,22 @@ namespace GOTech.Models
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Add custom user claims here
             return userIdentity;
         }
-    }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        private DbSet<Position> Positions { get; set; }
-        private DbSet<Employee> Employees { get; set; }
-        private DbSet<Project> Projects { get; set; }
-        private DbSet<Review> Reviews { get; set; }
+        // Add custom user claims here
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
+        // Foreign key, this field will tell whether the user is a Manager Developer, Designer, or Salesman
+        public int PositionId { get; set; }
+        public Position Position { get; set; }
 
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
+        public DateTime HiringDate { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string Province { get; set; }
+        public string PostalCode { get; set; }
+
     }
 }
