@@ -32,7 +32,7 @@ namespace GOTech.Models
      * 
      **/
 
-    public class EmployeeProjectJoin
+    public class EmployeeProject
     {
         public virtual int Id { get; set; }
         public virtual int AspNetUserId { get; set; }
