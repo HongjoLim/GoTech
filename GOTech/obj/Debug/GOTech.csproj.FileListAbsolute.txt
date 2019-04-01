@@ -112,4 +112,3 @@ C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Debug\GOTech.csproj.CoreCompi
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Debug\GOTech.csproj.CopyComplete
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Debug\GOTech.dll
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Debug\GOTech.pdb
-C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Debug\GOTech.csprojAssemblyReference.cache

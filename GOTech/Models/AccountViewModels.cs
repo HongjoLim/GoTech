@@ -105,8 +105,8 @@ namespace GOTech.Models
         public string City { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
-        [StringLength(5, MinimumLength = 2, ErrorMessage = "{0} must be between 2 to 5 characters")]
-        public string Province { get; set; }
+        public int ProvinceId { get; set; }
+        public Province Province { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
         [StringLength(10, MinimumLength = 2, ErrorMessage = "{0} must be between 2 to 10 characters")]

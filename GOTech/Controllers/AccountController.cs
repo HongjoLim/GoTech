@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GOTech.Models;
+using System.Collections.Generic;
 
 namespace GOTech.Controllers
 {
@@ -133,6 +134,8 @@ namespace GOTech.Controllers
         [AllowAnonymous]
         public ActionResult NonEmployeeRegister()
         {
+            // Add a SelectList to choose a province from
+            ViewBag.Provinces = new SelectList(_db.Provinces, "ProvinceId", "ProvinceName");
             return View();
         }
 
@@ -153,7 +156,7 @@ namespace GOTech.Controllers
                     HiringDate = DateTime.Now,
                     Address = model.Address,
                     City = model.City,
-                    Province = model.Province,
+                    ProvinceId = model.ProvinceId,
                     PostalCode = model.PostalCode
                 };
 
@@ -168,6 +171,8 @@ namespace GOTech.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+            // Add a SelectList to choose a province from
+            ViewBag.Provinces = new SelectList(_db.Provinces, "ProvinceId", "ProvinceName", model.ProvinceId);
             return View(model);
         }
 
@@ -180,6 +185,11 @@ namespace GOTech.Controllers
         {
             // Add a SelectList to choose a position from
             ViewBag.Positions = new SelectList(_db.Positions , "PositionId", "Title");
+
+            // Add a SelectList to choose a province from
+            ViewBag.Provinces = new SelectList(_db.Provinces, "ProvinceId", "ProvinceName");
+            
+
             return View();
         }
 
@@ -205,7 +215,7 @@ namespace GOTech.Controllers
                     HiringDate = DateTime.Now,
                     Address = model.Address,
                     City = model.City,
-                    Province = model.Province,
+                    ProvinceId = model.ProvinceId,
                     PostalCode = model.PostalCode
                 };
 
@@ -219,8 +229,10 @@ namespace GOTech.Controllers
                 AddErrors(result);
             }
 
-            // If failed, make sure the position list is available
+            // If failed, make sure the position & province lists is available
             ViewBag.Positions = new SelectList(_db.Positions, "PositionId", "Title", model.PositionId);
+            // Add a SelectList to choose a province from
+            ViewBag.Provinces = new SelectList(_db.Provinces, "ProvinceId", "ProvinceName", model.ProvinceId);
 
             // If we got this far, something failed, redisplay form
             return View(model);

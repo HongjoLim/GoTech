@@ -30,7 +30,10 @@ namespace GOTech.Models
         public DateTime HiringDate { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
-        public string Province { get; set; }
+
+        public int ProvinceId { get; set; }
+        public Province Province { get; set; }
+
         public string PostalCode { get; set; }
         #endregion
     }

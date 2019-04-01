@@ -7,6 +7,7 @@ namespace GOTech.Models
     {
         public DbSet<Project> Projects { get; set; }
         public DbSet<Position> Positions { get; set; }
+        public DbSet<Province> Provinces { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<EmployeeProject> EmployeeProject { get; set; }
 
