@@ -17,6 +17,7 @@ namespace GOTech.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
         private ApplicationDbContext _db = new ApplicationDbContext();
 
         public AccountController()
@@ -135,9 +136,53 @@ namespace GOTech.Controllers
             }
         }
 
+        // Customized action methods for registering an external user
+        // GET:/Account/NonEmployeeRegister
+        [AllowAnonymous]
+        public ActionResult NonEmployeeRegister()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NonEmployeeRegister(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    // This block of code adds our customized fields for an ApplicationUser
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    HiringDate = DateTime.Now,
+                    Address = model.Address,
+                    City = model.City,
+                    Province = model.Province,
+                    PostalCode = model.PostalCode
+                };
+
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        // TODO: Aministration role must be added
+        [Authorize]
         public ActionResult Register()
         {
             // Add a SelectList to choose a position from
@@ -148,7 +193,8 @@ namespace GOTech.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        // TODO: Aministration role must be added
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -166,8 +212,7 @@ namespace GOTech.Controllers
                     Address = model.Address,
                     City = model.City,
                     Province = model.Province,
-                    PostalCode = model.PostalCode,
-
+                    PostalCode = model.PostalCode
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -175,16 +220,13 @@ namespace GOTech.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
+
+            // If failed, make sure the position list is available
+            ViewBag.Positions = new SelectList(_db.Positions, "PositionId", "Title", model.PositionId);
 
             // If we got this far, something failed, redisplay form
             return View(model);
@@ -226,13 +268,6 @@ namespace GOTech.Controllers
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
-
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form

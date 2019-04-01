@@ -23,8 +23,7 @@ namespace GOTech.Models
         [DataType(DataType.MultilineText)]
         public virtual string Description { get; set; }
         public virtual bool Ongoing { get; set; }
-
-        public List<ApplicationUser> Employees { get; set; }
+        
         public List<Review> Reviews { get; set; }
 
     }
@@ -33,7 +32,7 @@ namespace GOTech.Models
      * 
      **/
 
-    public class EmployeeProjectJoin
+    public class EmployeeProject
     {
         public virtual int Id { get; set; }
         public virtual int AspNetUserId { get; set; }

@@ -20,8 +20,10 @@ namespace GOTech.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        // Foreign key, this field will tell whether the user is a Manager Developer, Designer, or Salesman
-        public int PositionId { get; set; }
+        /* Foreign key, this field will tell whether the user is a Manager Developer, Designer, or Salesman
+        This filed has to allow null value because external customers will not have any position ids.
+             */
+        public int? PositionId { get; set; }
         public Position Position { get; set; }
 
         public DateTime HiringDate { get; set; }
