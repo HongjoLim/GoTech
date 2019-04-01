@@ -13,7 +13,7 @@ namespace GOTech.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-
+            Database.SetInitializer(new GOTechDBInitializer());
         }
 
         public static ApplicationDbContext Create()

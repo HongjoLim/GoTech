@@ -16,7 +16,8 @@ namespace GOTech.Models
             return userIdentity;
         }
 
-        // Add custom user claims here
+        #region Customized fields
+        // Add extra fields to be used throuout our application
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
@@ -31,6 +32,6 @@ namespace GOTech.Models
         public string City { get; set; }
         public string Province { get; set; }
         public string PostalCode { get; set; }
-
+        #endregion
     }
 }

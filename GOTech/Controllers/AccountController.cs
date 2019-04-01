@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -75,8 +73,6 @@ namespace GOTech.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -117,11 +113,7 @@ namespace GOTech.Controllers
             {
                 return View(model);
             }
-
-            // The following code protects for brute force attacks against the two factor codes. 
-            // If a user enters incorrect codes for a specified amount of time then the user account 
-            // will be locked out for a specified amount of time. 
-            // You can configure the account lockout settings in IdentityConfig
+            
             var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
@@ -136,7 +128,7 @@ namespace GOTech.Controllers
             }
         }
 
-        // Customized action methods for registering an external user
+        // Custom action methods for registering an external user
         // GET:/Account/NonEmployeeRegister
         [AllowAnonymous]
         public ActionResult NonEmployeeRegister()
@@ -182,7 +174,8 @@ namespace GOTech.Controllers
         //
         // GET: /Account/Register
         // TODO: Aministration role must be added
-        [Authorize]
+        [AllowAnonymous]
+            //[Authorize]
         public ActionResult Register()
         {
             // Add a SelectList to choose a position from
@@ -194,7 +187,8 @@ namespace GOTech.Controllers
         // POST: /Account/Register
         [HttpPost]
         // TODO: Aministration role must be added
-        [Authorize]
+        [AllowAnonymous]
+        //[Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
