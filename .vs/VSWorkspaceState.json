@@ -2,10 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\GOTech",
-    "\\GOTech\\Controllers",
-    "\\GOTech\\Models",
-    "\\GOTech\\Views"
+    "\\GOTech\\App_Start"
   ],
-  "SelectedNode": "\\GOTech\\Controllers",
+  "SelectedNode": "\\GOTech\\App_Data",
   "PreviewInSolutionExplorer": false
 }

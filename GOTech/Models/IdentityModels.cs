@@ -31,7 +31,7 @@ namespace GOTech.Models
         public string Address { get; set; }
         public string City { get; set; }
 
-        public int ProvinceId { get; set; }
+        public int? ProvinceId { get; set; }
         public Province Province { get; set; }
 
         public string PostalCode { get; set; }

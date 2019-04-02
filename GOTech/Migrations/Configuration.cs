@@ -1,5 +1,6 @@
 using GOTech.Models;
 using System.Data.Entity.Migrations;
+using System.Web;
 
 namespace GOTech.Migrations
 {
@@ -12,6 +13,10 @@ namespace GOTech.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
+            // Configure user roles by using custom class
+            RolesConfiguration.ConfigureUserRoles(context);
+
+            // Seed default positions
             context.Positions.AddOrUpdate(
                  new Position { Title = "Developer" },
                  new Position { Title = "Salesman" },

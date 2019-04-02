@@ -1,11 +1,17 @@
 ﻿/* 
  * Name: Jo Lim
  * Date: Apr 1, 2019
- * Last Modified: Mar 25, 2019
+ * Last Modified: Apr 2, 2019
  * Description: This class is to be used to seed default data into our DB
  * */
 
+using GOTech.Migrations;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GOTech.Models
 {
@@ -13,6 +19,8 @@ namespace GOTech.Models
     {
         protected override void Seed(ApplicationDbContext context)
         {
+            RolesConfiguration.ConfigureUserRoles(context);
+
             // Seed default provinces
             context.Provinces.Add(new Province { ProvinceName = "AB" });
             context.Provinces.Add(new Province { ProvinceName = "BC" });

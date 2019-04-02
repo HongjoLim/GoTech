@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿/* 
+ * Name: Jo Lim
+ * Date: Apr 1, 2019
+ * Last Modified: Apr 1, 2019
+ * */
 
 namespace GOTech.Models
 {
