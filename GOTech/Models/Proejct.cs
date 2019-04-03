@@ -35,7 +35,7 @@ namespace GOTech.Models
     public class EmployeeProject
     {
         public virtual int Id { get; set; }
-        public virtual int AspNetUserId { get; set; }
+        public virtual int ApplicationUserId { get; set; }
         public virtual int ProjectId { get; set; }
     
     }

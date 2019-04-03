@@ -67,7 +67,7 @@ namespace GOTech.Controllers
                 _userManager = value;
             }
         }
-
+       
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -194,9 +194,7 @@ namespace GOTech.Controllers
 
         //
         // GET: /Account/Register
-        // TODO: Aministration role must be added
-        [AllowAnonymous]
-            //[Authorize]
+        [Authorize(Roles="Admin")]
         public ActionResult Register()
         {
             // Add a SelectList to choose a position from
@@ -211,9 +209,7 @@ namespace GOTech.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        // TODO: Aministration role must be added
-        [AllowAnonymous]
-        //[Authorize]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -237,10 +233,9 @@ namespace GOTech.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     // Assign "Employee role" to the user
-                    await UserManager.AddToRoleAsync(user.Id, RoleManager.FindByName("Employee").Id);
-                    return RedirectToAction("Index", "Home");
+                    await UserManager.AddToRoleAsync(user.Id, RoleManager.FindByName("Employee").Name);
+                    return RedirectToAction("Index", "Employees");
                 }
                 AddErrors(result);
             }

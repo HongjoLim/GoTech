@@ -7,13 +7,14 @@ using GOTech.Models;
 /* 
  * Name: Jo Lim
  * Date: Mar 26, 2019
- * Last Modified: Mar 25, 2019
+ * Last Modified: Apr 2, 2019
  * Description: This controller provides CRUD function to Project entity
  *                   The Create, Update, Delete function will only accessible to Managers or Administrator
  * */
 
 namespace GOTech.Controllers
 {
+    [Authorize(Roles = "Admin, Manager, Employee")]
     public class ProjectsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -39,6 +40,8 @@ namespace GOTech.Controllers
             return View(project);
         }
 
+        // Only managers can create new projects
+        [Authorize(Roles = "Admin, Manager")]
         // GET: Projects/Create
         public ActionResult Create()
         {
@@ -49,6 +52,7 @@ namespace GOTech.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin, Manager")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProjectId,Name,Description,Ongoing")] Project project)
         {
@@ -63,6 +67,7 @@ namespace GOTech.Controllers
         }
 
         // GET: Projects/Edit/5
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -82,6 +87,7 @@ namespace GOTech.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult Edit([Bind(Include = "ProjectId,Name,Description,Ongoing")] Project project)
         {
             if (ModelState.IsValid)
@@ -94,6 +100,7 @@ namespace GOTech.Controllers
         }
 
         // GET: Projects/Delete/5
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -110,6 +117,7 @@ namespace GOTech.Controllers
 
         // POST: Projects/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin, Manager")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
