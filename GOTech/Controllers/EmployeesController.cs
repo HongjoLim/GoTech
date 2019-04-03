@@ -105,32 +105,37 @@ namespace GOTech.Controllers
             return View(user);
         }
 
-        //// GET: Employees/Delete/5
-        //public async Task<ActionResult> Delete(string email)
-        //{
-        //    if (email == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    var user = await UserManager.FindByEmailAsync(email);
-        //    if (user == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(user);
-        //}
+        // GET: Employees/Delete/5
+        public async Task<ActionResult> Delete(string email)
+        {
+            if (email == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = await UserManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
 
-        // POST: Employees/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> DeleteConfirmed([Bind(Include = "Id")] ApplicationUser user)
-        //{
-        //    var employee = db.Users.Find(user.Id);
-        //     Remove the user
-        //    db.Users.Remove(employee);
-        //    await db.SaveChangesAsync();
-        //    return RedirectToAction("Index");
-        //}
+        // POST: ApplicationUsers/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed([Bind(Include = "Email")] ApplicationUser user)
+        {
+            var employee = await UserManager.FindByEmailAsync(user.Email);
+            if (employee != null)
+            {
+                await UserManager.RemoveFromRoleAsync(employee.Id, "Employee");
+                await UserManager.DeleteAsync(employee);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
 
         protected override void Dispose(bool disposing)
         {
