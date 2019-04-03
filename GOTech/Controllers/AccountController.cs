@@ -7,7 +7,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GOTech.Models;
-using System.Collections.Generic;
 
 namespace GOTech.Controllers
 {
@@ -16,6 +15,9 @@ namespace GOTech.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+        // Declare role manager
+        private ApplicationRoleManager _roleManager;
 
         private ApplicationDbContext _db = new ApplicationDbContext();
 
@@ -27,6 +29,19 @@ namespace GOTech.Controllers
         {
             UserManager = userManager;
             SignInManager = signInManager;
+        }
+
+        // Declare Role manager property
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
         }
 
         public ApplicationSignInManager SignInManager
@@ -52,7 +67,7 @@ namespace GOTech.Controllers
                 _userManager = value;
             }
         }
-
+       
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -164,7 +179,8 @@ namespace GOTech.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    
+                    // Assign "Customer role" to the user
+                    await UserManager.AddToRoleAsync(user.Id, RoleManager.FindByName("Customer").Name);
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -178,17 +194,14 @@ namespace GOTech.Controllers
 
         //
         // GET: /Account/Register
-        // TODO: Aministration role must be added
-        [AllowAnonymous]
-            //[Authorize]
+        [Authorize(Roles="Admin")]
         public ActionResult Register()
         {
             // Add a SelectList to choose a position from
             ViewBag.Positions = new SelectList(_db.Positions , "PositionId", "Title");
 
             // Add a SelectList to choose a province from
-            ViewBag.Provinces = new SelectList(_db.Provinces, "ProvinceId", "ProvinceName");
-            
+            ViewBag.Provinces = new SelectList(_db.Provinces, "ProvinceId", "ProvinceName");   
 
             return View();
         }
@@ -196,9 +209,7 @@ namespace GOTech.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        // TODO: Aministration role must be added
-        [AllowAnonymous]
-        //[Authorize]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -222,9 +233,9 @@ namespace GOTech.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    return RedirectToAction("Index", "Home");
+                    // Assign "Employee role" to the user
+                    await UserManager.AddToRoleAsync(user.Id, RoleManager.FindByName("Employee").Name);
+                    return RedirectToAction("Index", "Employees");
                 }
                 AddErrors(result);
             }

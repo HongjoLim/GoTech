@@ -7,13 +7,15 @@ using GOTech.Models;
 /* 
  * Name: Jo Lim
  * Date: Mar 26, 2019
- * Last Modified: Mar 25, 2019
+ * Last Modified: Apr 2, 2019
  * Description: This controller provides CRUD function to Position entity
  *                   This controller will ONLY be accessible to Administrator
  * */
 
 namespace GOTech.Controllers
 {
+    // Control access
+    [Authorize(Roles ="Admin")]
     public class PositionsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
