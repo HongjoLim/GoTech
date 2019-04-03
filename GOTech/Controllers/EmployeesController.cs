@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -51,7 +52,7 @@ namespace GOTech.Controllers
             var employees = from employee in users
                                             where employee.PositionId != null
                                             select employee;
-            return View(employees);
+            return View(employees.Include(x=>x.Position));
         }
 
         // GET: Employees/Details/5
@@ -68,40 +69,41 @@ namespace GOTech.Controllers
             }
             return View(user);
         }
-        
-        //// GET: Employees/Edit/5
-        //public async Task<ActionResult> Edit(string email)
-        //{
-        //    if (email == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    var user = await UserManager.FindByNameAsync(email);
-        //    if (user == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title", user.PositionId);
-        //    ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
-        //    return View(user);
-        //}
 
-        //// POST: Employees/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Edit([Bind(Include = "Id,FirstName,LastName,PositionId,HiringDate,Address,City,ProvinceId,PostalCode,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser user)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var result = await UserManager.UpdateAsync(user);
-        //        if (result!=null) { return RedirectToAction("Index"); }
-        //    }
-        //    ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title", user.PositionId);
-        //    ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
-        //    return View(user);
-        //}
+        // GET: Employees/Edit/5
+        public async Task<ActionResult> Edit(string email)
+        {
+            if (email == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = await UserManager.FindByNameAsync(email);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title", user.PositionId);
+            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
+            return View(user);
+        }
+
+        // POST: Employees/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit([Bind(Include = "Id,FirstName,LastName,PositionId,HiringDate,Address,City,ProvinceId,PostalCode,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser user)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(user).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index"); 
+            }
+            ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title", user.PositionId);
+            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
+            return View(user);
+        }
 
         //// GET: Employees/Delete/5
         //public async Task<ActionResult> Delete(string email)
@@ -110,7 +112,7 @@ namespace GOTech.Controllers
         //    {
         //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         //    }
-        //    var user = await UserManager.FindByNameAsync(email);
+        //    var user = await UserManager.FindByEmailAsync(email);
         //    if (user == null)
         //    {
         //        return HttpNotFound();
@@ -118,13 +120,15 @@ namespace GOTech.Controllers
         //    return View(user);
         //}
 
-        //// POST: Employees/Delete/5
+        // POST: Employees/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> DeleteConfirmed(string email)
+        //public async Task<ActionResult> DeleteConfirmed([Bind(Include = "Id")] ApplicationUser user)
         //{
-        //    var user = UserManager.FindByNameAsync(email);
-        //    await UserManager.DeleteAsync(user);
+        //    var employee = db.Users.Find(user.Id);
+        //     Remove the user
+        //    db.Users.Remove(employee);
+        //    await db.SaveChangesAsync();
         //    return RedirectToAction("Index");
         //}
 
