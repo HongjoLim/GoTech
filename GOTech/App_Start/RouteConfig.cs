@@ -15,6 +15,20 @@ namespace GOTech
 
             routes.MapMvcAttributeRoutes();
 
+            // Customers controller do not use id parameter. Instead, it uses email parameter (string)
+            routes.MapRoute(
+                name: "Customer",
+                url: "External/{action}",
+                defaults: new { controller = "Customers", action = "Index" }
+            );
+
+            // Employees controller do not use id parameter. Instead, it uses email parameter (string)
+            routes.MapRoute(
+                name: "Employee",
+                url: "Internal/{action}",
+                defaults: new { controller = "Employees", action = "Index"}
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

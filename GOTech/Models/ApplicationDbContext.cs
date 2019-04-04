@@ -21,5 +21,6 @@ namespace GOTech.Models
         {
             return new ApplicationDbContext();
         }
+
     }
 }

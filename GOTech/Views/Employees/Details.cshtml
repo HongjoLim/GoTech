@@ -17,15 +17,6 @@
         <dd>
             @Html.DisplayFor(model => model.Position.Title)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Province.ProvinceName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Province.ProvinceName)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
@@ -67,6 +58,14 @@
         </dd>
 
         <dt>
+            Province
+        </dt>
+
+        <dd>
+            @ViewBag.ProvinceName
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.PostalCode)
         </dt>
 
@@ -89,15 +88,6 @@
         <dd>
             @Html.DisplayFor(model => model.EmailConfirmed)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PasswordHash)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PasswordHash)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.SecurityStamp)
         </dt>

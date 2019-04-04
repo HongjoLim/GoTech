@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
  * Name: Jo Lim
  * Date: Apr 2, 2019
  * Last Modified: Apr 2, 2019
- * Description: This controller provides URD function of Employees (ApplicationUser)
+ * Description: This controller provides CRUD function of Employees (ApplicationUser)
  * */
 
 namespace GOTech.Controllers
@@ -67,6 +67,7 @@ namespace GOTech.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ProvinceName = db.Provinces.FirstOrDefault(x => x.ProvinceId == user.ProvinceId).ProvinceName;
             return View(user);
         }
 
