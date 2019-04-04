@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 /* 
  * Name: Jo Lim
  * Date: Apr 3, 2019
- * Last Modified: Apr 3, 2019
+ * Last Modified: Apr 5, 2019
  * Description: This controller provides RUD function of Customers (ApplicationUser)
  * */
 
@@ -20,14 +20,26 @@ namespace GOTech.Controllers
     [Authorize(Roles = "Admin")]
     public class CustomersController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db;
         private ApplicationUserManager _userManager;
 
         public CustomersController() { }
 
-        public CustomersController(ApplicationUserManager userManager)
+        public CustomersController(ApplicationUserManager userManager, ApplicationDbContext db)
         {
             UserManager = userManager;
+            Db = db;
+        }
+
+        public ApplicationDbContext Db {
+            get
+            {
+                return db ?? new ApplicationDbContext();
+            }
+            set
+            {
+                db = value;
+            }
         }
 
         public ApplicationUserManager UserManager
@@ -45,14 +57,9 @@ namespace GOTech.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            var users = db.Users.AsQueryable();
-
             // Only select customers from application user table. Customers have NULL value for position id
-            var customers = from customer in users
-                            where (customer.PositionId == null &&
-                            // Do not include admin user
-                            customer.UserName != "admin@gotech.com")
-                            select customer;
+            var customers = Db.Users.Where(x => x.PositionId == null&&
+                                                             x.UserName != "admin@gotech.com");
             return View(customers.Include(x => x.Province));
         }
 
@@ -68,7 +75,7 @@ namespace GOTech.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProvinceName = db.Provinces.FirstOrDefault(x => x.ProvinceId == user.ProvinceId).ProvinceName;
+            ViewBag.ProvinceName = Db.Provinces.FirstOrDefault(x => x.ProvinceId == user.ProvinceId).ProvinceName;
             return View(user);
         }
 
@@ -84,7 +91,7 @@ namespace GOTech.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
+            ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
             return View(user);
         }
 
@@ -97,8 +104,8 @@ namespace GOTech.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                Db.Entry(user).State = EntityState.Modified;
+                await Db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
@@ -133,7 +140,7 @@ namespace GOTech.Controllers
                 
                 // Delete the user
                 await UserManager.DeleteAsync(customer);
-                db.SaveChanges();
+                Db.SaveChanges();
                 return RedirectToAction("Index");
             }
         
@@ -144,7 +151,7 @@ namespace GOTech.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                Db.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 /* 
  * Name: Jo Lim
  * Date: Apr 2, 2019
- * Last Modified: Apr 2, 2019
+ * Last Modified: Apr 5, 2019
  * Description: This controller provides CRUD function of Employees (ApplicationUser)
  * */
 
@@ -20,15 +20,28 @@ namespace GOTech.Controllers
     [Authorize(Roles ="Admin")]
     public class EmployeesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db;
         private ApplicationUserManager _userManager;
 
         // This no-parameter controller must exist
         public EmployeesController() { }
 
-        public EmployeesController(ApplicationUserManager userManager)
+        public EmployeesController(ApplicationUserManager userManager, ApplicationDbContext db)
         {
             UserManager = userManager;
+            Db = db;
+        }
+
+        public ApplicationDbContext Db
+        {
+            get
+            {
+                return db ?? new ApplicationDbContext();
+            }
+            set
+            {
+                db = value;
+            }
         }
 
         public ApplicationUserManager UserManager
@@ -46,12 +59,9 @@ namespace GOTech.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            var users = db.Users.AsQueryable();
-
             // Find employees among the application users. Employees DO have positionId
-            var employees = from employee in users
-                                            where employee.PositionId != null
-                                            select employee;
+            var employees = Db.Users.Where(x => x.PositionId != null);
+            
             return View(employees.Include(x=>x.Position));
         }
 
@@ -83,8 +93,8 @@ namespace GOTech.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title", user.PositionId);
-            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
+            ViewBag.PositionId = new SelectList(Db.Positions, "PositionId", "Title", user.PositionId);
+            ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
             return View(user);
         }
 
@@ -97,12 +107,12 @@ namespace GOTech.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                Db.Entry(user).State = EntityState.Modified;
+                await Db.SaveChangesAsync();
                 return RedirectToAction("Index"); 
             }
-            ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title", user.PositionId);
-            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
+            ViewBag.PositionId = new SelectList(Db.Positions, "PositionId", "Title", user.PositionId);
+            ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
             return View(user);
         }
 
@@ -131,7 +141,7 @@ namespace GOTech.Controllers
             {
                 await UserManager.RemoveFromRoleAsync(employee.Id, "Employee");
                 await UserManager.DeleteAsync(employee);
-                db.SaveChanges();
+                Db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -142,7 +152,7 @@ namespace GOTech.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                Db.Dispose();
             }
             base.Dispose(disposing);
         }
