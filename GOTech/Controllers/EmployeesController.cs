@@ -66,18 +66,18 @@ namespace GOTech.Controllers
         }
 
         // GET: Employees/Details/5
-        public async Task<ActionResult> Details(string email)
+        public ActionResult Details(string email)
         {
             if (email == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var user = await UserManager.FindByNameAsync(email);
+            var user = Db.Users.FirstOrDefault(x => x.Email == email);
             if (user == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ProvinceName = db.Provinces.FirstOrDefault(x => x.ProvinceId == user.ProvinceId).ProvinceName;
+            ViewBag.ProvinceName = Db.Provinces.FirstOrDefault(x => x.ProvinceId == user.ProvinceId).ProvinceName;
             return View(user);
         }
 
