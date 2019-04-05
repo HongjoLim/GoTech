@@ -125,10 +125,12 @@ C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.AspNe
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.Owin.Security.dll
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\System.Web.Http.dll
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.Owin.Security.Cookies.dll
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.Owin.Security.Facebook.dll
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.Owin.Security.Google.dll
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Owin.Security.Providers.LinkedIn.dll
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\System.Web.Http.WebHost.dll
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\System.Net.Http.Formatting.dll
-C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Newtonsoft.Json.dll
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\GOTech.pdb
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\GOTech.dll.config
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Castle.Core.xml
@@ -154,6 +156,8 @@ C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.AspNe
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.Owin.Security.xml
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\System.Web.Http.xml
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.Owin.Security.Cookies.xml
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.Owin.Security.Facebook.xml
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.Owin.Security.Google.xml
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\System.Web.Http.WebHost.xml
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTechUnitTest\bin\Debug\System.Net.Http.Formatting.xml

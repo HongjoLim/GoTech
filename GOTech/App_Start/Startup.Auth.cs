@@ -5,6 +5,8 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 using GOTech.Models;
+using Microsoft.Owin.Security.Google;
+using Owin.Security.Providers.LinkedIn;
 
 namespace GOTech
 {
@@ -53,19 +55,21 @@ namespace GOTech
             //    clientId: "",
             //    clientSecret: "");
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+            app.UseFacebookAuthentication(
+                appId: "1215420375288500",
+                appSecret: "7d376adbc0ee880e71e32cf39b522054");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "547809525804-f63jgfnud8vtf281v24bo1dv0k27007e.apps.googleusercontent.com",
+                ClientSecret = "i2vlnHOilrFJxLM5Bmr98bLn"
+            });
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseLinkedInAuthentication(new LinkedInAuthenticationOptions()
+            {
+                ClientId = "77btu9dpi85o9l",
+                ClientSecret = "QvU4yoMxQDSyRqW3"
+            });
         }
     }
 }

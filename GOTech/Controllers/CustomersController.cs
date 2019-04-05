@@ -75,7 +75,10 @@ namespace GOTech.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProvinceName = Db.Provinces.FirstOrDefault(x => x.ProvinceId == user.ProvinceId).ProvinceName;
+            if (user.ProvinceId != null)
+            {
+                ViewBag.ProvinceName = Db.Provinces.FirstOrDefault(x => x.ProvinceId == user.ProvinceId).ProvinceName;
+            }
             return View(user);
         }
 
@@ -91,7 +94,10 @@ namespace GOTech.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
+            if (user.ProvinceId != null)
+            {
+                ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
+            }
             return View(user);
         }
 
@@ -108,7 +114,10 @@ namespace GOTech.Controllers
                 await Db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
+            if (user.ProvinceId != null)
+            {
+                ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
+            }
             return View(user);
         }
 
