@@ -9,7 +9,7 @@ using System.Web.Routing;
  * Name: Jo Lim
  * Date: Apr 5, 2019
  * Last Modified: Apr 5, 2019
- * Description: This class unit tests Routing throughout the website
+ * Description: This class unit tests Routing in HomeController
  * */
 
 namespace GOTechUnitTest.RoutingTest

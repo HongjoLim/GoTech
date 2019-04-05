@@ -16,15 +16,15 @@ namespace GOTech
             // Customers controller do not use id parameter. Instead, it uses email parameter (string)
             routes.MapRoute(
                 name: "Customer",
-                url: "External/{action}",
-                defaults: new { controller = "Customers", action = "Index" }
+                url: "External/{action}/{email}",
+                defaults: new { controller = "Customers", action = "Index", email = UrlParameter.Optional }
             );
 
             // Employees controller do not use id parameter. Instead, it uses email parameter (string)
             routes.MapRoute(
                 name: "Employee",
-                url: "Internal/{action}",
-                defaults: new { controller = "Employees", action = "Index"}
+                url: "Internal/{action}/{email}",
+                defaults: new { controller = "Employees", action = "Index", email = UrlParameter.Optional }
             );
 
             routes.MapRoute(
