@@ -54,7 +54,7 @@ namespace GOTech.Controllers
             }
         }
 
-        // GET: Customers
+        // GET
         public ActionResult Index()
         {
             // Only select customers from application user table. Customers have NULL value for position id
@@ -63,7 +63,7 @@ namespace GOTech.Controllers
             return View(customers.Include(x => x.Province));
         }
 
-        // GET: Customers/Details/5
+        // GET
         public async Task<ActionResult> Details(string email)
         {
             if (email == null)
@@ -86,7 +86,7 @@ namespace GOTech.Controllers
             return View(user);
         }
 
-        // GET: Customers/Edit/5
+        // GET
         public async Task<ActionResult> Edit(string email)
         {
             if (email == null)
@@ -109,7 +109,7 @@ namespace GOTech.Controllers
             return View(user);
         }
 
-        // POST: Customers/Edit/5
+        // POST
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -133,7 +133,7 @@ namespace GOTech.Controllers
             return View(user);
         }
 
-        // GET: Customers/Delete/5
+        // GET
         public async Task<ActionResult> Delete(string email)
         {
             if (email == null)
@@ -148,7 +148,7 @@ namespace GOTech.Controllers
             return View(user);
         }
 
-        // POST: Customers/Delete/5
+        // POST
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed([Bind(Include = "Email")] ApplicationUser user)

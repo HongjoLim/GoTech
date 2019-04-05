@@ -1,7 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -56,7 +55,7 @@ namespace GOTech.Controllers
             }
         }
 
-        // GET: Employees
+        // GET
         public ActionResult Index()
         {
             // Find employees among the application users. Employees DO have positionId
@@ -65,7 +64,7 @@ namespace GOTech.Controllers
             return View(employees.Include(x=>x.Position));
         }
 
-        // GET: Employees/Details/5
+        // GET
         public ActionResult Details(string email)
         {
             if (email == null)
@@ -81,7 +80,7 @@ namespace GOTech.Controllers
             return View(user);
         }
 
-        // GET: Employees/Edit/5
+        // GET
         public async Task<ActionResult> Edit(string email)
         {
             if (email == null)
@@ -98,7 +97,7 @@ namespace GOTech.Controllers
             return View(user);
         }
 
-        // POST: Employees/Edit/5
+        // POST
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -116,7 +115,7 @@ namespace GOTech.Controllers
             return View(user);
         }
 
-        // GET: Employees/Delete/5
+        // GET
         public async Task<ActionResult> Delete(string email)
         {
             if (email == null)
@@ -131,7 +130,7 @@ namespace GOTech.Controllers
             return View(user);
         }
 
-        // POST: ApplicationUsers/Delete/5
+        // POST
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed([Bind(Include = "Email")] ApplicationUser user)
