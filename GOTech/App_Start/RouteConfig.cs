@@ -13,8 +13,6 @@ namespace GOTech
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapMvcAttributeRoutes();
-
             // Customers controller do not use id parameter. Instead, it uses email parameter (string)
             routes.MapRoute(
                 name: "Customer",
