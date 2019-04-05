@@ -108,7 +108,7 @@ namespace GOTech.Controllers
                 await Db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
+            ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
             return View(user);
         }
 
