@@ -1,28 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using GOTech;
+﻿using GOTech;
 using GOTech.Controllers;
 using GOTech.Models;
 using GOTechUnitTest.Tools;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
-/* 
- * Name: Jo Lim
- * Date: Apr 5, 2019
- * Last Modified: Apr 5, 2019
- * Description: This class unit tests EmployeesController
- * */
-
-namespace GOTechUnitTest
+namespace GOTechUnitTest.ControllerTest
 {
     [TestClass]
-    public class EmployeesControllerUnitTest
+    public class CustomersControllerUnitTest
     {
         // Declare mocked objects
         private Mock<DbSet<ApplicationUser>> _userSet;
@@ -32,7 +26,7 @@ namespace GOTechUnitTest
         private Mock<ApplicationUserManager> _userManager;
 
         // Declare the controller
-        private EmployeesController _controller; 
+        private CustomersController _controller;
 
         // Initialize instance variables
         [TestInitialize]
@@ -43,7 +37,7 @@ namespace GOTechUnitTest
             _provinceSet = new Mock<DbSet<Province>>();
             _store = new Mock<IUserStore<ApplicationUser>>();
             _userManager = new Mock<ApplicationUserManager>(_store.Object);
-            _controller = new EmployeesController(_userManager.Object, _db.Object);
+            _controller = new CustomersController(_userManager.Object, _db.Object);
         }
 
         // When there is 1 employee and 1 customer in our db
@@ -74,16 +68,17 @@ namespace GOTechUnitTest
             var result = _controller.Index() as ViewResult;
 
             // Type cast the ViewResult object to IEnumerable<T> to count members
-            var employees = (IEnumerable<ApplicationUser>)result.Model;
+            var customers = (IEnumerable<ApplicationUser>)result.Model;
 
             // ASSERT
             Assert.AreNotEqual(null, result);
-            Assert.AreEqual(1, employees.Count());
+            Assert.AreEqual(1, customers.Count());
+            Assert.AreEqual(dummyUsers.ToList()[1].UserName, "czebahi2@gmail.com");
         }
 
         // When there is 1 employee and 1 customer in our db
         [TestMethod]
-        public void IndexWhenNoEmployee()
+        public void IndexWhenNoCustomer()
         {
             // ARRANGE
             var dummyUsers = new List<ApplicationUser>
@@ -92,6 +87,7 @@ namespace GOTechUnitTest
                 {
                     UserName = "czebahi2@gmail.com",
                     Email = "czebahi2@gmail.com",
+                    PositionId = 2
                 }
             }.AsQueryable();
 
@@ -103,55 +99,11 @@ namespace GOTechUnitTest
             var result = _controller.Index() as ViewResult;
 
             // Type cast the ViewResult object to IEnumerable<T> to count Members
-            var employees = (IEnumerable<ApplicationUser>) result.Model;
+            var customers = (IEnumerable<ApplicationUser>)result.Model;
 
             // ASSERT
             Assert.AreNotEqual(null, result);
-            Assert.AreEqual(0, employees.Count());
-        }
-
-        [TestMethod]
-        public void DetailsWhenEmailNotNull()
-        {
-            // ARRANGE
-            var dummyUsers = new List<ApplicationUser>
-            {
-                new ApplicationUser
-                {
-                    UserName = "czebahi2@gmail.com",
-                    Email = "czebahi2@gmail.com",
-                    ProvinceId = 1
-                }
-            }.AsQueryable();
-
-            var dummyProvinces = new List<Province>
-            {
-                new Province{
-                    ProvinceId = 1,
-                    ProvinceName = "ON"
-                }
-            }.AsQueryable();
-
-            _userSet = MockingHelper.Create(dummyUsers);
-
-            _provinceSet = MockingHelper.Create(dummyProvinces);
-
-            _db.Setup(c => c.Users).Returns(_userSet.Object);
-            _db.Setup(c => c.Provinces).Returns(_provinceSet.Object);
-
-            // ACT
-            var resultTask = _controller.Details(dummyUsers.FirstOrDefault().Email);
-
-            // Type cast the Result from TasdummyProvincesk<ActionResult> method to ViewResult
-            var result = (ViewResult) resultTask;
-
-            // Type cast the ViewResult object to ApplicationUser to count Members
-            var employee = (ApplicationUser) result.Model;
-
-            // ASSERT
-            Assert.AreNotEqual(null, result);
-            Assert.AreEqual(dummyUsers.FirstOrDefault().Email, employee.Email);
-            Assert.AreEqual(dummyUsers.FirstOrDefault().ProvinceId, employee.ProvinceId);
+            Assert.AreEqual(0, customers.Count());
         }
     }
 }
