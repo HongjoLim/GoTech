@@ -79,6 +79,10 @@ namespace GOTech.Controllers
             {
                 ViewBag.ProvinceName = Db.Provinces.FirstOrDefault(x => x.ProvinceId == user.ProvinceId).ProvinceName;
             }
+            else
+            {
+                ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", 1);
+            }
             return View(user);
         }
 
@@ -97,6 +101,10 @@ namespace GOTech.Controllers
             if (user.ProvinceId != null)
             {
                 ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
+            }
+            else
+            {
+                ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", 1);
             }
             return View(user);
         }
@@ -117,6 +125,10 @@ namespace GOTech.Controllers
             if (user.ProvinceId != null)
             {
                 ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
+            }
+            else
+            {
+                ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", 1);
             }
             return View(user);
         }
