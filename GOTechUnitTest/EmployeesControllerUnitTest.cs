@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using GOTech;
 using GOTech.Controllers;
 using GOTech.Models;
+using GOTechUnitTest.Tools;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -64,11 +65,8 @@ namespace GOTechUnitTest
                     Email = "czebahi2@gmail.com",
                 }
             }.AsQueryable();
-            
-            _userSet.As<IQueryable<ApplicationUser>>().Setup(m => m.Provider).Returns(dummyUsers.Provider);
-            _userSet.As<IQueryable<ApplicationUser>>().Setup(m => m.Expression).Returns(dummyUsers.Expression);
-            _userSet.As<IQueryable<ApplicationUser>>().Setup(m => m.ElementType).Returns(dummyUsers.ElementType);
-            _userSet.As<IQueryable<ApplicationUser>>().Setup(m => m.GetEnumerator()).Returns(dummyUsers.GetEnumerator());
+
+            _userSet = MockingHelper.Create(dummyUsers);
 
             _db.Setup(c => c.Users).Returns(_userSet.Object);
 
@@ -97,10 +95,7 @@ namespace GOTechUnitTest
                 }
             }.AsQueryable();
 
-            _userSet.As<IQueryable<ApplicationUser>>().Setup(m => m.Provider).Returns(dummyUsers.Provider);
-            _userSet.As<IQueryable<ApplicationUser>>().Setup(m => m.Expression).Returns(dummyUsers.Expression);
-            _userSet.As<IQueryable<ApplicationUser>>().Setup(m => m.ElementType).Returns(dummyUsers.ElementType);
-            _userSet.As<IQueryable<ApplicationUser>>().Setup(m => m.GetEnumerator()).Returns(dummyUsers.GetEnumerator());
+            _userSet = MockingHelper.Create(dummyUsers);
 
             _db.Setup(c => c.Users).Returns(_userSet.Object);
 
@@ -137,16 +132,9 @@ namespace GOTechUnitTest
                 }
             }.AsQueryable();
 
-            _userSet.As<IQueryable<ApplicationUser>>().Setup(m => m.Provider).Returns(dummyUsers.Provider);
-            _userSet.As<IQueryable<ApplicationUser>>().Setup(m => m.Expression).Returns(dummyUsers.Expression);
-            _userSet.As<IQueryable<ApplicationUser>>().Setup(m => m.ElementType).Returns(dummyUsers.ElementType);
-            _userSet.As<IQueryable<ApplicationUser>>().Setup(m => m.GetEnumerator()).Returns(dummyUsers.GetEnumerator());
+            _userSet = MockingHelper.Create(dummyUsers);
 
-            _provinceSet.As<IQueryable<Province>>().Setup(m => m.Provider).Returns(dummyProvinces.Provider);
-            _provinceSet.As<IQueryable<Province>>().Setup(m => m.Expression).Returns(dummyProvinces.Expression);
-            _provinceSet.As<IQueryable<Province>>().Setup(m => m.ElementType).Returns(dummyProvinces.ElementType);
-            _provinceSet.As<IQueryable<Province>>().Setup(m => m.GetEnumerator()).Returns(dummyProvinces.GetEnumerator());
-
+            _provinceSet = MockingHelper.Create(dummyProvinces);
 
             _db.Setup(c => c.Users).Returns(_userSet.Object);
             _db.Setup(c => c.Provinces).Returns(_provinceSet.Object);
