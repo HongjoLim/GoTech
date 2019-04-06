@@ -20,6 +20,7 @@ namespace GOTech
             container.RegisterType<ManageController>(new InjectionConstructor());
             container.RegisterType<EmployeesController>(new InjectionConstructor());
             container.RegisterType<CustomersController>(new InjectionConstructor());
+            container.RegisterType<PositionsController>(new InjectionConstructor());
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

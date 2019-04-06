@@ -42,6 +42,9 @@ namespace GOTech.Models
             context.Positions.Add(new Position { Title = "Salesman" });
             context.Positions.Add(new Position { Title = "Designer" });
             context.Positions.Add(new Position { Title = "Manager" });
+            // This is needed. Employees and customers are distinguished by position Id and 
+            // if the position gets deleted, we would need to assign temporary position Id
+            context.Positions.Add(new Position { Title = "UnAssigned" });
 
             base.Seed(context);
         }

@@ -44,6 +44,8 @@ namespace GOTechUnitTest.ControllerTest
             _provinceSet = new Mock<DbSet<Province>>();
             _store = new Mock<IUserStore<ApplicationUser>>();
             _userManager = new Mock<ApplicationUserManager>(_store.Object);
+
+            // Very important to inject dependency. Otherwise, this test will use real db
             _controller = new EmployeesController(_userManager.Object, _db.Object);
         }
 

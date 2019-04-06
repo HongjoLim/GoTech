@@ -10,6 +10,9 @@ using GOTech.Models;
  * Last Modified: Apr 2, 2019
  * Description: This controller provides CRUD function to Position entity
  *                   This controller will ONLY be accessible to Administrator
+ * 
+ * TO DO: "PositionService" has to be created becuase some of the action methods in this contorller
+ *              has too many logic
  * */
 
 namespace GOTech.Controllers
@@ -18,12 +21,33 @@ namespace GOTech.Controllers
     [Authorize(Roles ="Admin")]
     public class PositionsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext _db;
+
+        public PositionsController(){ }
+
+        public PositionsController(ApplicationDbContext db)
+        {
+            this._db = db;
+        }
+
+        public ApplicationDbContext Db
+        {
+            get
+            {
+                return _db ?? new ApplicationDbContext();
+            }
+            set
+            {
+                _db = value;
+            }
+        }
 
         // GET: Positions
         public ActionResult Index()
         {
-            return View(db.Positions.ToList());
+            // DO NOT show UnAssigned position becuase it cannot be deleted
+            var positions = Db.Positions.Where(x => x.Title != "UnAssigned");
+            return View(positions);
         }
 
         // GET: Positions/Details/5
@@ -33,7 +57,7 @@ namespace GOTech.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Position position = db.Positions.Find(id);
+            Position position = Db.Positions.FirstOrDefault(x=>x.PositionId == id);
             if (position == null)
             {
                 return HttpNotFound();
@@ -56,8 +80,8 @@ namespace GOTech.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Positions.Add(position);
-                db.SaveChanges();
+                Db.Positions.Add(position);
+                Db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -71,7 +95,7 @@ namespace GOTech.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Position position = db.Positions.Find(id);
+            Position position = Db.Positions.Find(id);
             if (position == null)
             {
                 return HttpNotFound();
@@ -88,8 +112,8 @@ namespace GOTech.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(position).State = EntityState.Modified;
-                db.SaveChanges();
+                Db.Entry(position).State = EntityState.Modified;
+                Db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(position);
@@ -102,7 +126,7 @@ namespace GOTech.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Position position = db.Positions.Find(id);
+            Position position = Db.Positions.Find(id);
             if (position == null)
             {
                 return HttpNotFound();
@@ -115,9 +139,19 @@ namespace GOTech.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Position position = db.Positions.Find(id);
-            db.Positions.Remove(position);
-            db.SaveChanges();
+            Position position = Db.Positions.Find(id);
+
+            // TO DO: This logic has to be moved to "Project Service class"
+            // Assign employees temporary id
+            var users = Db.Users.Where(x => x.PositionId == id);
+            var unAssignedPositionId = Db.Positions.FirstOrDefault(x => x.Title == "UnAssigned").PositionId;
+            foreach (ApplicationUser user in users)
+            {
+                user.PositionId = unAssignedPositionId;
+            }
+
+            Db.Positions.Remove(position);
+            Db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -125,7 +159,7 @@ namespace GOTech.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                Db.Dispose();
             }
             base.Dispose(disposing);
         }
