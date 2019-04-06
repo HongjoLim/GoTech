@@ -83,7 +83,7 @@ namespace GOTech.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Position position = _db.Positions.Find(id);
+            Position position = _db.Positions.FirstOrDefault(x=>x.PositionId == id );
             if (position == null)
             {
                 return HttpNotFound();
@@ -114,7 +114,7 @@ namespace GOTech.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Position position = _db.Positions.Find(id);
+            Position position = _db.Positions.FirstOrDefault(x=>x.PositionId == id);
             if (position == null)
             {
                 return HttpNotFound();

@@ -13,6 +13,9 @@ namespace GOTech.Models
         // Primary key
         [Key]
         public virtual int PositionId { get; set; }
+
+        [Required]
+        [StringLength(20, ErrorMessage = "The {0} must be between {2} ~ {1} characters long.", MinimumLength = 2)]
         public virtual string Title { get; set; }
     }
 }
