@@ -22,7 +22,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*
-        The "Employees", "Customers" will only be seen to "Admin" user
+                        The "Employees", "Customers" will only be seen to "Admin" user
                     *@
                     @if (User.IsInRole("Admin"))
                     {
@@ -31,7 +31,7 @@
                         <li>@Html.ActionLink("Positions", "Index", "Positions")</li>
                     }
                     @*
-        "Customers" and non-user cannot see "Projects" menu
+                        "Customers" and non-user cannot see "Projects" menu
                     *@
                     @if (User.IsInRole("Admin") || User.IsInRole("Employee") || User.IsInRole("Manager"))
                     {
@@ -47,12 +47,12 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-        </footer>
+        <footer></footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src=”~/scripts/jquery.unobtrusive-ajax.min.js”></script>
 </body>
 </html>

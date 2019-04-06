@@ -19,7 +19,7 @@ namespace GOTech.Controllers
     [Authorize(Roles ="Admin")]
     public class EmployeesController : Controller
     {
-        private ApplicationDbContext db;
+        private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationUserManager _userManager;
 
         // This no-parameter controller must exist
@@ -28,19 +28,7 @@ namespace GOTech.Controllers
         public EmployeesController(ApplicationUserManager userManager, ApplicationDbContext db)
         {
             UserManager = userManager;
-            Db = db;
-        }
-
-        public ApplicationDbContext Db
-        {
-            get
-            {
-                return db ?? new ApplicationDbContext();
-            }
-            set
-            {
-                db = value;
-            }
+            this.db = db;
         }
 
         public ApplicationUserManager UserManager
@@ -59,7 +47,7 @@ namespace GOTech.Controllers
         public ActionResult Index()
         {
             // Find employees among the application users. Employees DO have positionId
-            var employees = Db.Users.Where(x => x.PositionId != null);
+            var employees = db.Users.Where(x => x.PositionId != null);
             
             return View(employees.Include(x=>x.Position));
         }
@@ -71,12 +59,12 @@ namespace GOTech.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var user = Db.Users.FirstOrDefault(x => x.Email == email);
+            var user = db.Users.FirstOrDefault(x => x.Email == email);
             if (user == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ProvinceName = Db.Provinces.FirstOrDefault(x => x.ProvinceId == user.ProvinceId).ProvinceName;
+            ViewBag.ProvinceName = db.Provinces.FirstOrDefault(x => x.ProvinceId == user.ProvinceId).ProvinceName;
             return View(user);
         }
 
@@ -92,8 +80,8 @@ namespace GOTech.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PositionId = new SelectList(Db.Positions, "PositionId", "Title", user.PositionId);
-            ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
+            ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title", user.PositionId);
+            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
             return View(user);
         }
 
@@ -106,12 +94,12 @@ namespace GOTech.Controllers
         {
             if (ModelState.IsValid)
             {
-                Db.Entry(user).State = EntityState.Modified;
-                await Db.SaveChangesAsync();
+                db.Entry(user).State = EntityState.Modified;
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index"); 
             }
-            ViewBag.PositionId = new SelectList(Db.Positions, "PositionId", "Title", user.PositionId);
-            ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
+            ViewBag.PositionId = new SelectList(db.Positions, "PositionId", "Title", user.PositionId);
+            ViewBag.ProvinceId = new SelectList(db.Provinces, "ProvinceId", "ProvinceName", user.ProvinceId);
             return View(user);
         }
 
@@ -140,7 +128,7 @@ namespace GOTech.Controllers
             {
                 await UserManager.RemoveFromRoleAsync(employee.Id, "Employee");
                 await UserManager.DeleteAsync(employee);
-                Db.SaveChanges();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -151,7 +139,7 @@ namespace GOTech.Controllers
         {
             if (disposing)
             {
-                Db.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
         }

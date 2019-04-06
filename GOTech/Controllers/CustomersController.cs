@@ -20,7 +20,7 @@ namespace GOTech.Controllers
     [Authorize(Roles = "Admin")]
     public class CustomersController : Controller
     {
-        private ApplicationDbContext db;
+        private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationUserManager _userManager;
 
         public CustomersController() { }
