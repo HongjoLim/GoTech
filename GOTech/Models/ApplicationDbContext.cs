@@ -12,7 +12,7 @@ namespace GOTech.Models
         public virtual DbSet<EmployeeProject> EmployeeProject { get; set; }
 
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DefaultConnection")
         {
             Database.SetInitializer(new GOTechDBInitializer());
         }
