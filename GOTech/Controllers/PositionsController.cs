@@ -21,7 +21,7 @@ namespace GOTech.Controllers
     [Authorize(Roles ="Admin")]
     public class PositionsController : Controller
     {
-        private ApplicationDbContext _db;
+        private ApplicationDbContext _db = new ApplicationDbContext();
 
         public PositionsController(){ }
 
@@ -30,23 +30,11 @@ namespace GOTech.Controllers
             this._db = db;
         }
 
-        public ApplicationDbContext Db
-        {
-            get
-            {
-                return _db ?? new ApplicationDbContext();
-            }
-            set
-            {
-                _db = value;
-            }
-        }
-
         // GET: Positions
         public ActionResult Index()
         {
             // DO NOT show UnAssigned position becuase it cannot be deleted
-            var positions = Db.Positions.Where(x => x.Title != "UnAssigned");
+            var positions = _db.Positions.Where(x => x.Title != "UnAssigned");
             return View(positions);
         }
 
@@ -57,7 +45,7 @@ namespace GOTech.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Position position = Db.Positions.FirstOrDefault(x=>x.PositionId == id);
+            Position position = _db.Positions.FirstOrDefault(x=>x.PositionId == id);
             if (position == null)
             {
                 return HttpNotFound();
@@ -80,8 +68,8 @@ namespace GOTech.Controllers
         {
             if (ModelState.IsValid)
             {
-                Db.Positions.Add(position);
-                Db.SaveChanges();
+                _db.Positions.Add(position);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -95,7 +83,7 @@ namespace GOTech.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Position position = Db.Positions.Find(id);
+            Position position = _db.Positions.Find(id);
             if (position == null)
             {
                 return HttpNotFound();
@@ -112,8 +100,8 @@ namespace GOTech.Controllers
         {
             if (ModelState.IsValid)
             {
-                Db.Entry(position).State = EntityState.Modified;
-                Db.SaveChanges();
+                _db.Entry(position).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(position);
@@ -126,7 +114,7 @@ namespace GOTech.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Position position = Db.Positions.Find(id);
+            Position position = _db.Positions.Find(id);
             if (position == null)
             {
                 return HttpNotFound();
@@ -139,19 +127,19 @@ namespace GOTech.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Position position = Db.Positions.Find(id);
+            Position position = _db.Positions.FirstOrDefault(x=>x.PositionId==id);
+            _db.Positions.Remove(position);
 
             // TO DO: This logic has to be moved to "Project Service class"
             // Assign employees temporary id
-            var users = Db.Users.Where(x => x.PositionId == id);
-            var unAssignedPositionId = Db.Positions.FirstOrDefault(x => x.Title == "UnAssigned").PositionId;
+            var users = _db.Users.Where(x => x.PositionId == id);
+            var unAssignedPositionId = _db.Positions.FirstOrDefault(x => x.Title == "UnAssigned").PositionId;
             foreach (ApplicationUser user in users)
             {
                 user.PositionId = unAssignedPositionId;
             }
 
-            Db.Positions.Remove(position);
-            Db.SaveChanges();
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -159,7 +147,7 @@ namespace GOTech.Controllers
         {
             if (disposing)
             {
-                Db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

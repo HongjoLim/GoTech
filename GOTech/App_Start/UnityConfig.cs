@@ -1,4 +1,6 @@
 using GOTech.Controllers;
+using GOTech.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web.Mvc;
 using Unity;
 using Unity.Injection;
@@ -16,6 +18,7 @@ namespace GOTech
             // it is NOT necessary to register your controllers
 
             // e.g. container.RegisterType<ITestService, TestService>();
+            container.RegisterType<IdentityDbContext<ApplicationUser>, ApplicationDbContext>();
             container.RegisterType<AccountController>(new InjectionConstructor());
             container.RegisterType<ManageController>(new InjectionConstructor());
             container.RegisterType<EmployeesController>(new InjectionConstructor());
