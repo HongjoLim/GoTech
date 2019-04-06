@@ -63,7 +63,6 @@ namespace GOTechUnitTest.RoutingTest
             Assert.IsNotNull(routeData);
             Assert.AreEqual("Customers", routeData.Values["controller"]);
             Assert.AreEqual("Index", routeData.Values["action"]);
-            Assert.AreEqual(UrlParameter.Optional, routeData.Values["email"]);
         }
 
         // https://{application base path}/External/Details
@@ -84,10 +83,10 @@ namespace GOTechUnitTest.RoutingTest
 
         // https://{application base path}/External/Details/random@google.com
         [TestMethod]
-        public void CustomerDetailsRandomParameter()
+        public void CustomerDetails()
         {
             // ARRANGE
-            CreateHttpContext("~/External/Details/random@gmail.com");
+            CreateHttpContext("~/External/Details");
 
             // ACT
             RouteData routeData = _routes.GetRouteData(_context.Object);
@@ -96,7 +95,6 @@ namespace GOTechUnitTest.RoutingTest
             Assert.IsNotNull(routeData);
             Assert.AreEqual("Customers", routeData.Values["controller"]);
             Assert.AreEqual("Details", routeData.Values["action"]);
-            Assert.IsTrue(UrlParameter.Equals("random@gmail.com", routeData.Values["email"]));
         }
 
         [TestMethod]
@@ -115,10 +113,10 @@ namespace GOTechUnitTest.RoutingTest
 
         // https://{application base path}/External/Details/random@google.com
         [TestMethod]
-        public void CustomerEditRandomParameterGET()
+        public void CustomerEditGET()
         {
             // ARRANGE
-            CreateHttpContext("~/External/Edit/random@gmail.com");
+            CreateHttpContext("~/External/Edit");
 
             // ACT
             RouteData routeData = _routes.GetRouteData(_context.Object);
@@ -127,16 +125,15 @@ namespace GOTechUnitTest.RoutingTest
             Assert.IsNotNull(routeData);
             Assert.AreEqual("Customers", routeData.Values["controller"]);
             Assert.AreEqual("Edit", routeData.Values["action"]);
-            Assert.IsTrue(UrlParameter.Equals("random@gmail.com", routeData.Values["email"]));
         }
 
         // https://{application base path}/External/Details/random@google.com
         // POST method
         [TestMethod]
-        public void CustomerEditRandomParameterPost()
+        public void CustomerEditPost()
         {
             // ARRANGE
-            CreateHttpContext("~/External/Edit/random@gmail.com", "POST");
+            CreateHttpContext("~/External/Edit", "POST");
 
             // ACT
             RouteData routeData = _routes.GetRouteData(_context.Object);
@@ -145,15 +142,14 @@ namespace GOTechUnitTest.RoutingTest
             Assert.IsNotNull(routeData);
             Assert.AreEqual("Customers", routeData.Values["controller"]);
             Assert.AreEqual("Edit", routeData.Values["action"]);
-            Assert.IsTrue(UrlParameter.Equals("random@gmail.com", routeData.Values["email"]));
         }
 
         // https://{application base path}/External/Details/random@google.com
         [TestMethod]
-        public void CustomerDeleteRandomParameterGET()
+        public void CustomerDeleteGET()
         {
             // ARRANGE
-            CreateHttpContext("~/External/Delete/random@gmail.com");
+            CreateHttpContext("~/External/Delete");
 
             // ACT
             RouteData routeData = _routes.GetRouteData(_context.Object);
@@ -162,16 +158,15 @@ namespace GOTechUnitTest.RoutingTest
             Assert.IsNotNull(routeData);
             Assert.AreEqual("Customers", routeData.Values["controller"]);
             Assert.AreEqual("Delete", routeData.Values["action"]);
-            Assert.IsTrue(UrlParameter.Equals("random@gmail.com", routeData.Values["email"]));
         }
 
         // https://{application base path}/External/Details/random@google.com
         // POST method
         [TestMethod]
-        public void CustomerDeleteConfirmedRandomParameterPost()
+        public void CustomerDeleteConfirmedPost()
         {
             // ARRANGE
-            CreateHttpContext("~/External/Delete/random@gmail.com", "POST");
+            CreateHttpContext("~/External/Delete", "POST");
 
             // ACT
             RouteData routeData = _routes.GetRouteData(_context.Object);
@@ -180,7 +175,6 @@ namespace GOTechUnitTest.RoutingTest
             Assert.IsNotNull(routeData);
             Assert.AreEqual("Customers", routeData.Values["controller"]);
             Assert.AreEqual("Delete", routeData.Values["action"]);
-            Assert.IsTrue(UrlParameter.Equals("random@gmail.com", routeData.Values["email"]));
         }
     }
 }

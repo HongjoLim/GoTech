@@ -19,6 +19,7 @@ namespace GOTech.Models
     {
         protected override void Seed(ApplicationDbContext context)
         {
+            // Configure application user roles with custom class
             RolesConfiguration.ConfigureUserRoles(context);
 
             // Seed default provinces

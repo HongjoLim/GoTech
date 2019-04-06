@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace GOTech
@@ -16,15 +12,15 @@ namespace GOTech
             // Customers controller do not use id parameter. Instead, it uses email parameter (string)
             routes.MapRoute(
                 name: "Customer",
-                url: "External/{action}/{email}",
-                defaults: new { controller = "Customers", action = "Index", email = UrlParameter.Optional }
+                url: "External/{action}",
+                defaults: new { controller = "Customers", action = "Index" }
             );
 
             // Employees controller do not use id parameter. Instead, it uses email parameter (string)
             routes.MapRoute(
                 name: "Employee",
-                url: "Internal/{action}/{email}",
-                defaults: new { controller = "Employees", action = "Index", email = UrlParameter.Optional }
+                url: "Internal/{action}",
+                defaults: new { controller = "Employees", action = "Index"}
             );
 
             routes.MapRoute(
