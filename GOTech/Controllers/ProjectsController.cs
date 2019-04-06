@@ -19,6 +19,14 @@ namespace GOTech.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ProjectsController()
+        { }
+
+        public ProjectsController(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
+
         // GET: Projects
         public ActionResult Index()
         {
@@ -32,7 +40,7 @@ namespace GOTech.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = db.Projects.Find(id);
+            Project project = db.Projects.FirstOrDefault(x=>x.ProjectId == id);
             if (project == null)
             {
                 return HttpNotFound();
@@ -74,7 +82,7 @@ namespace GOTech.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = db.Projects.Find(id);
+            Project project = db.Projects.FirstOrDefault(x => x.ProjectId == id);
             if (project == null)
             {
                 return HttpNotFound();
@@ -107,7 +115,7 @@ namespace GOTech.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = db.Projects.Find(id);
+            Project project = db.Projects.FirstOrDefault(x => x.ProjectId == id);
             if (project == null)
             {
                 return HttpNotFound();

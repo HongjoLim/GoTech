@@ -462,7 +462,7 @@ namespace GOTechUnitTest.ControllerTest
 
         // Delete GET
         [TestMethod]
-        public void DeleteConfirmedWhenIdNotNullFoundPositionNotNull()
+        public void DeleteWhenIdNotNullFoundPositionNotNull()
         {
             // ARRANGE
             var dummyPositions = new List<Position>
@@ -501,6 +501,7 @@ namespace GOTechUnitTest.ControllerTest
 
         // DeleteConfirmed POST
         // Case1: There IS employee that had the positionId (user wants to delete)
+        // Not fully tested. Not really test-friendly method
         [TestMethod]
         public void DeleteConfirmedWhenEmployeeWithThatPositionId()
         {
@@ -560,7 +561,8 @@ namespace GOTechUnitTest.ControllerTest
         }
 
         // DeleteConfirmed POST
-        // Case1: There is NO employee that had the positionId (user wants to delete)
+        // Case2: There is NO employee that had the positionId (user wants to delete)
+        // Not fully tested. Not really test-friendly method
         [TestMethod]
         public void DeleteConfirmedWhenNoEmployeeWithThatPositionId()
         {
@@ -610,8 +612,8 @@ namespace GOTechUnitTest.ControllerTest
             _positionSet = MockingHelper.Create(dummyPositions);
             _userSet = MockingHelper.Create(dummyEmployees);
 
-            _db.Setup(c => c.Positions).Returns(_positionSet.Object);
-            _db.Setup(c => c.Users).Returns(_userSet.Object);
+            _db.Setup(x => x.Positions).Returns(_positionSet.Object);
+            _db.Setup(x => x.Users).Returns(_userSet.Object);
 
             // ACT - delete the positionId for Developer
             var result = _controller.DeleteConfirmed(2);
