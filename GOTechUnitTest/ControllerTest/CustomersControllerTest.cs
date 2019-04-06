@@ -51,9 +51,9 @@ namespace GOTechUnitTest.ControllerTest
         [TestMethod]
         public void IndexWhenOneEmployeeOneCustomer()
         {
+            // ARRANGE
             var dummyUsers = new List<ApplicationUser>
             {
-                // ARRANGE
                 new ApplicationUser
                 {
                     UserName = "czebahi1@gmail.com",
