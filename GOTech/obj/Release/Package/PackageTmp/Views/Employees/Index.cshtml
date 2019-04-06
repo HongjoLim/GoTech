@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<GOTech.Models.ApplicationUser>
 
 @{
-    ViewBag.Title = "Our Employees";
+                /**/
+
+                ViewBag.Title = "Our Employees";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -10,6 +12,10 @@
 <p>
     @Html.ActionLink("Register", "Register", "Account")
 </p>
+<form id="myForm">
+    <label for="positionsDropdown"><b>Position</b></label>
+    <select class="form-control" id="positionDropdown" name="positionsDropdown"></select>
+</form>
 <table class="table">
     <tr>
         <th>
@@ -33,32 +39,33 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Position.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HiringDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { email = item.Email }) |
-            @Html.ActionLink("Details", "Details", new { email = item.Email }) |
-            @Html.ActionLink("Delete", "Delete", new { email = item.Email})
-        </td>
-    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Position.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.HiringDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { email = item.Email }) |
+        @Html.ActionLink("Details", "Details", new { email = item.Email }) |
+        @Html.ActionLink("Delete", "Delete", new { email = item.Email })
+    </td>
+</tr>
 }
 
 </table>
