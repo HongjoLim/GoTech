@@ -112,6 +112,8 @@
     <Compile Include="RoutingTest\HomeControllerRoutingTest.cs" />
     <Compile Include="RoutingTest\CustomersControllerRoutingTest.cs" />
     <Compile Include="RoutingTest\EmployeesControllerRoutingTest.cs" />
+    <Compile Include="RoutingTest\ProjectsControllerRoutingTest.cs" />
+    <Compile Include="RoutingTest\PositionsControllerRoutingTest.cs" />
     <Compile Include="Tools\MockingHelper.cs" />
   </ItemGroup>
   <ItemGroup>
