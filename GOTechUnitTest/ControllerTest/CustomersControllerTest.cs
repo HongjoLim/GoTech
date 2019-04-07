@@ -17,7 +17,7 @@ using System.Web.Mvc;
 /* 
  * Name: Jo Lim
  * Date: Apr 5, 2019
- * Last Modified: Apr 5, 2019
+ * Last Modified: Apr 7, 2019
  * Description: This class unit tests CustomersController
  * */
 
