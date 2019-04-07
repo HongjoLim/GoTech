@@ -310,7 +310,7 @@ namespace GOTechUnitTest.ControllerTest
             Assert.IsNotNull(resultView.Model);
             Assert.AreEqual(dummyUser.Email, resultModel.Email);
             Assert.AreEqual(dummyProvince.ProvinceId, resultModel.ProvinceId);
-            Assert.AreEqual(dummyProvince.ProvinceId, resultModel.ProvinceId);
+            Assert.AreEqual(dummyPosition.PositionId, resultModel.PositionId);
         }
 
         // Edit Post - needs to be tested
@@ -365,6 +365,7 @@ namespace GOTechUnitTest.ControllerTest
             Assert.AreEqual(typeof(ViewResult), result.GetType());
             Assert.IsNotNull(resultView.Model);
             Assert.AreEqual(dummyUser.Email, resultModel.Email);
+            Assert.AreEqual(dummyUser.ProvinceId, resultModel.ProvinceId);
         }
 
         [TestMethod]
@@ -383,6 +384,7 @@ namespace GOTechUnitTest.ControllerTest
             _userManager.Verify(x => x.FindByEmailAsync(It.IsAny<string>()), Times.Never);
         }
 
+        // Delete GET
         [TestMethod]
         public async Task DeleteWhenEmailNotNullFoundUserNull()
         {
@@ -419,6 +421,7 @@ namespace GOTechUnitTest.ControllerTest
 
         }
 
+        // Delete GET
         [TestMethod]
         public async Task DeleteWhenEmailNotNullUserNotNull()
         {
@@ -475,5 +478,73 @@ namespace GOTechUnitTest.ControllerTest
             Assert.AreEqual(user.Email, resultViewModel.Email);
         }
 
+        // DeleteConfirmed
+        [TestMethod]
+        public async Task DeleteConfirmedWhenFoundEmployeeNotNull()
+        {
+            // ARRANGE
+            var dummyUsers = new List<ApplicationUser>
+            {
+                new ApplicationUser
+                {
+                    UserName = "czebahi@gmail.com",
+                    Email = "czebahi@gmail.com",
+                    ProvinceId = 1,
+                    PositionId = 1
+                }
+            }.AsQueryable();
+
+            _userSet = MockingHelper.Create(dummyUsers);
+           
+            // Set the mocked db sets in the mocked db context
+            _db.Setup(c => c.Users).Returns(_userSet.Object);
+            
+            // This value will get returned from UserManager
+            ApplicationUser user = dummyUsers.ToList()[0];
+            var email = user.Email;
+
+            // Manipulate the method in and UserManager so that it cannot find the user
+            _userManager.Setup(x => x.FindByEmailAsync(email)).Returns(Task.FromResult(user));
+
+            _db.Setup(x => x.SaveChanges()).Returns(3);
+
+            // ACT
+            var result = await _controller.DeleteConfirmed(user);
+
+            // ASSERT
+            Assert.AreEqual(typeof(RedirectToRouteResult), result.GetType());
+            _userManager.Verify(x => x.FindByEmailAsync(It.IsAny<string>()), Times.Once);
+            _userManager.Verify(x => x.DeleteAsync(It.IsAny<ApplicationUser>()), Times.Once);
+            _userManager.Verify(x => x.RemoveFromRoleAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+            _db.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+        // DeleteConfirmed
+        [TestMethod]
+        public async Task DeleteConfirmedWhenFoundEmployeeNull()
+        {
+            // ARRANGE
+            var dummyUser = new ApplicationUser
+            {
+                UserName = "czebahi@gmail.com",
+                Email = "czebahi@gmail.com",
+                ProvinceId = 1,
+                PositionId = 1
+            };
+
+            ApplicationUser found = null;
+
+            string randomEmail = "random@gmail.com";
+
+            // Manipulate the method in and UserManager so that it cannot find the user
+            _userManager.Setup(x => x.FindByEmailAsync(randomEmail)).Returns(Task.FromResult(found));
+
+            // ACT
+            var result = await _controller.DeleteConfirmed(dummyUser) as HttpStatusCodeResult;
+
+            // ASSERT
+            Assert.AreEqual((int) HttpStatusCode.BadRequest, result.StatusCode);
+            _userManager.Verify(x => x.FindByEmailAsync(It.IsAny<string>()), Times.Once);
+        }
     }
 }

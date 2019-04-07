@@ -75,12 +75,14 @@ namespace GOTech.Controllers
             {
                 return HttpNotFound();
             }
+            // Externally singed-up users do not have province id. So make sure if they have province id.
             if (user.ProvinceId != null)
             {
                 ViewBag.ProvinceName = Db.Provinces.FirstOrDefault(x => x.ProvinceId == user.ProvinceId).ProvinceName;
             }
             else
             {
+                // If they do not have province id, show the first from the province list
                 ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", 1);
             }
             return View(user);

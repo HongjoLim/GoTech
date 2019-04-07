@@ -338,44 +338,41 @@ namespace GOTechUnitTest.ControllerTest
         [TestMethod]
         public void EditWhenModelStateValid()
         {
-        //    // ARRANGE
-        //    var dummyPositions = new List<Position>
-        //    {
-        //        new Position
-        //        {
-        //            PositionId = 1,
-        //            Title = "Developer"
-        //        },
-        //        new Position
-        //        {
-        //            PositionId = 2,
-        //            Title = "Designer"
-        //        },
-        //        new Position
-        //        {
-        //            PositionId = 3,
-        //            Title = "UnAssigned"
-        //        }
-        //    }.AsQueryable();
+            //// ARRANGE
+            //var dummyPositions = new List<Position>
+            //{
+            //    new Position
+            //    {
+            //        PositionId = 1,
+            //        Title = "Developer"
+            //    },
+            //    new Position
+            //    {
+            //        PositionId = 2,
+            //        Title = "Designer"
+            //    },
+            //    new Position
+            //    {
+            //        PositionId = 3,
+            //        Title = "UnAssigned"
+            //    }
+            //}.AsQueryable();
 
-        //    _positionSet = MockingHelper.Create(dummyPositions);
-        //    var chagnedModel = new Position
-        //    {
-        //        PositionId = 2,
-        //        Title = "Design"
-        //    };
+            //_positionSet = MockingHelper.Create(dummyPositions);
+            //var chagnedModel = new Position
+            //{
+            //    PositionId = 2,
+            //    Title = "Design"
+            //};
 
-        //    _db.Setup(c => c.Positions).Returns(_positionSet.Object);
-        //    //Assert.IsTrue(dbContext.Object.ChangeTracker.Entries().Any(entry =>
-        //    //entry.State == EntityState.Modified
-        //    _db.Setup(c => c.ChangeTracker.Entries().Any).Returns(EntityState.Modified);
+            //_db.Setup(c => c.Positions).Returns(_positionSet.Object);
 
-        //    // ACT
-        //    var result = _controller.Edit(chagnedModel) as ViewResult;
+            //// ACT
+            //var result = _controller.Edit(chagnedModel) as ViewResult;
 
-        //    // ASSERT
-        //    Assert.AreNotEqual(null, result);
-        //    Assert.AreEqual(typeof(RedirectToRouteResult), result.GetType());
+            //// ASSERT
+            //Assert.AreNotEqual(null, result);
+            //Assert.AreEqual(typeof(RedirectToRouteResult), result.GetType());
         }
 
         // Edit POST
