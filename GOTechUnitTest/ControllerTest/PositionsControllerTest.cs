@@ -383,8 +383,6 @@ namespace GOTechUnitTest.ControllerTest
         public void EditWhenModelStateNotValid()
         {
             // ARRANGE
-            _controller.ModelState.AddModelError("error", "some error");
-
             var dummyPosition = new Position
             {
                 PositionId = 1,
@@ -394,6 +392,7 @@ namespace GOTechUnitTest.ControllerTest
             _positionSet = MockingHelper.Create(new List<Position> { dummyPosition }.AsQueryable());
 
             _db.Setup(c => c.Positions).Returns(_positionSet.Object);
+            _controller.ModelState.AddModelError("error", "some error");
 
             // ACT
             var result = _controller.Edit(1);
