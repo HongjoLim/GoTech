@@ -1,20 +1,20 @@
-﻿ using GOTech;
- using Microsoft.VisualStudio.TestTools.UnitTesting;
- using Moq;
- using System.Web;
- using System.Web.Mvc;
- using System.Web.Routing;
+﻿using GOTech;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
 
 /* 
  * Name: Jo Lim
  * Date: Apr 5, 2019
- * Last Modified: Apr 5, 2019
+ * Last Modified: Apr 7, 2019
  * Description: This class unit tests Routing in CustomersController
  * */
 namespace GOTechUnitTest.RoutingTest
 {
     [TestClass]
-    public class CustomersControllerRoutingTest
+    public class PositionsControllerRoutingTest
     {
         private Mock<HttpRequestBase> _request;
         private Mock<HttpContextBase> _context;
@@ -49,131 +49,167 @@ namespace GOTechUnitTest.RoutingTest
             RouteConfig.RegisterRoutes(_routes);
         }
 
-        // https://{application base path}/External
+        // https://{application base path}/Positions
         [TestMethod]
-        public void CustomerIndexNoParameter()
+        public void IndexNoParameter()
         {
             // ARRANGE
-            CreateHttpContext("~/External");
+            CreateHttpContext("~/Positions");
 
             // ACT
             RouteData routeData = _routes.GetRouteData(_context.Object);
 
             // ASSERT
             Assert.IsNotNull(routeData);
-            Assert.AreEqual("Customers", routeData.Values["controller"]);
+            Assert.AreEqual("Positions", routeData.Values["controller"]);
             Assert.AreEqual("Index", routeData.Values["action"]);
         }
 
-        // https://{application base path}/External/Details
-        // However, in this case, this routing is going nowhere. "email" is NOT an optional parameter in this action method
+        // https://{application base path}/Positions
         [TestMethod]
-        public void CustomerDetailsNoParameter()
+        public void CreateGET()
         {
             // ARRANGE
-            CreateHttpContext("~/External/Details");
-
-            // ACT
-            RouteData routeData = _routes.GetRouteData(_context.Object);
-
-            // ASSERT
-            Assert.AreEqual("Customers", routeData.Values["controller"]);
-            Assert.AreEqual("Details", routeData.Values["action"]);
-        }
-
-        // https://{application base path}/External/Details/random@google.com
-        [TestMethod]
-        public void CustomerDetails()
-        {
-            // ARRANGE
-            CreateHttpContext("~/External/Details");
+            CreateHttpContext("~/Positions/Create");
 
             // ACT
             RouteData routeData = _routes.GetRouteData(_context.Object);
 
             // ASSERT
             Assert.IsNotNull(routeData);
-            Assert.AreEqual("Customers", routeData.Values["controller"]);
-            Assert.AreEqual("Details", routeData.Values["action"]);
+            Assert.AreEqual("Positions", routeData.Values["controller"]);
+            Assert.AreEqual("Create", routeData.Values["action"]);
+            Assert.AreEqual(UrlParameter.Optional, routeData.Values["id"]);
         }
 
+        // https://{application base path}/Positions
         [TestMethod]
-        public void CustomerEditNoParameterGET()
+        public void CreatePOST()
         {
             // ARRANGE
-            CreateHttpContext("~/External/Edit");
-
-            // ACT
-            RouteData routeData = _routes.GetRouteData(_context.Object);
-
-            // ASSERT
-            Assert.AreEqual("Customers", routeData.Values["controller"]);
-            Assert.AreEqual("Edit", routeData.Values["action"]);
-        }
-
-        // https://{application base path}/External/Edit/random@google.com
-        [TestMethod]
-        public void CustomerEditGET()
-        {
-            // ARRANGE
-            CreateHttpContext("~/External/Edit");
+            CreateHttpContext("~/Positions/Create", "POST");
 
             // ACT
             RouteData routeData = _routes.GetRouteData(_context.Object);
 
             // ASSERT
             Assert.IsNotNull(routeData);
-            Assert.AreEqual("Customers", routeData.Values["controller"]);
-            Assert.AreEqual("Edit", routeData.Values["action"]);
+            Assert.AreEqual("Positions", routeData.Values["controller"]);
+            Assert.AreEqual("Create", routeData.Values["action"]);
+            Assert.AreEqual(UrlParameter.Optional, routeData.Values["id"]);
         }
 
-        // https://{application base path}/External/Edit/random@google.com
+        // https://{application base path}/Positions/Details
+        [TestMethod]
+        public void DetailsNoParameter()
+        {
+            // ARRANGE
+            CreateHttpContext("~/Positions/Details");
+
+            // ACT
+            RouteData routeData = _routes.GetRouteData(_context.Object);
+
+            // ASSERT
+            Assert.AreEqual("Positions", routeData.Values["controller"]);
+            Assert.AreEqual("Details", routeData.Values["action"]);
+        }
+
+        // https://{application base path}/Positions/Details/1
+        [TestMethod]
+        public void Details()
+        {
+            // ARRANGE
+            CreateHttpContext("~/Positions/Details/1");
+
+            // ACT
+            RouteData routeData = _routes.GetRouteData(_context.Object);
+
+            // ASSERT
+            Assert.IsNotNull(routeData);
+            Assert.AreEqual("Positions", routeData.Values["controller"]);
+            Assert.AreEqual("Details", routeData.Values["action"]);
+        }
+
+        [TestMethod]
+        public void EditNoParameterGET()
+        {
+            // ARRANGE
+            CreateHttpContext("~/Positions/Edit");
+
+            // ACT
+            RouteData routeData = _routes.GetRouteData(_context.Object);
+
+            // ASSERT
+            Assert.AreEqual("Positions", routeData.Values["controller"]);
+            Assert.AreEqual("Edit", routeData.Values["action"]);
+            Assert.AreEqual(UrlParameter.Optional, routeData.Values["id"]);
+        }
+
+        // https://{application base path}/Positions/Edit/1
+        [TestMethod]
+        public void EditGET()
+        {
+            // ARRANGE
+            CreateHttpContext("~/Positions/Edit/1");
+
+            // ACT
+            RouteData routeData = _routes.GetRouteData(_context.Object);
+
+            // ASSERT
+            Assert.IsNotNull(routeData);
+            Assert.AreEqual("Positions", routeData.Values["controller"]);
+            Assert.AreEqual("Edit", routeData.Values["action"]);
+            Assert.AreEqual("1", routeData.Values["id"]);
+        }
+
+        // https://{application base path}/Positions/Edit
         // POST method
         [TestMethod]
-        public void CustomerEditPost()
+        public void EditPost()
         {
             // ARRANGE
-            CreateHttpContext("~/External/Edit", "POST");
+            CreateHttpContext("~/Positions/Edit", "POST");
 
             // ACT
             RouteData routeData = _routes.GetRouteData(_context.Object);
 
             // ASSERT
             Assert.IsNotNull(routeData);
-            Assert.AreEqual("Customers", routeData.Values["controller"]);
+            Assert.AreEqual("Positions", routeData.Values["controller"]);
             Assert.AreEqual("Edit", routeData.Values["action"]);
         }
 
-        // https://{application base path}/External/Delete/random@google.com
+        // https://{application base path}/Positions/Delete/1
         [TestMethod]
-        public void CustomerDeleteGET()
+        public void DeleteGET()
         {
             // ARRANGE
-            CreateHttpContext("~/External/Delete");
+            CreateHttpContext("~/Positions/Delete/1");
 
             // ACT
             RouteData routeData = _routes.GetRouteData(_context.Object);
 
             // ASSERT
             Assert.IsNotNull(routeData);
-            Assert.AreEqual("Customers", routeData.Values["controller"]);
+            Assert.AreEqual("Positions", routeData.Values["controller"]);
             Assert.AreEqual("Delete", routeData.Values["action"]);
+            Assert.AreEqual("1", routeData.Values["id"]);
         }
 
-        // https://{application base path}/External/Delete/random@google.com
+        // https://{application base path}/Positions/Delete
         // POST method
         [TestMethod]
-        public void CustomerDeleteConfirmedPost()
+        public void DeleteConfirmedPost()
         {
             // ARRANGE
-            CreateHttpContext("~/External/Delete", "POST");
+            CreateHttpContext("~/Positions/Delete", "POST");
 
             // ACT
             RouteData routeData = _routes.GetRouteData(_context.Object);
 
             // ASSERT
             Assert.IsNotNull(routeData);
-            Assert.AreEqual("Customers", routeData.Values["controller"]);
+            Assert.AreEqual("Positions", routeData.Values["controller"]);
             Assert.AreEqual("Delete", routeData.Values["action"]);
         }
     }
