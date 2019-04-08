@@ -14,16 +14,14 @@ namespace GOTech
         {
 			var container = new UnityContainer();
 
-            // register all your components with the container here
-            // it is NOT necessary to register your controllers
-
-            // e.g. container.RegisterType<ITestService, TestService>();
+            // To unit test, I had to register all the controllers (Dependency Injection issue)
             container.RegisterType<IdentityDbContext<ApplicationUser>, ApplicationDbContext>();
             container.RegisterType<AccountController>(new InjectionConstructor());
             container.RegisterType<ManageController>(new InjectionConstructor());
             container.RegisterType<EmployeesController>(new InjectionConstructor());
             container.RegisterType<CustomersController>(new InjectionConstructor());
             container.RegisterType<PositionsController>(new InjectionConstructor());
+            container.RegisterType<ProjectsController>(new InjectionConstructor());
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

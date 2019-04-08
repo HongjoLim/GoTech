@@ -75,12 +75,14 @@ namespace GOTech.Controllers
             {
                 return HttpNotFound();
             }
+            // Externally singed-up users do not have province id. So make sure if they have province id.
             if (user.ProvinceId != null)
             {
                 ViewBag.ProvinceName = Db.Provinces.FirstOrDefault(x => x.ProvinceId == user.ProvinceId).ProvinceName;
             }
             else
             {
+                // If they do not have province id, show the first from the province list
                 ViewBag.ProvinceId = new SelectList(Db.Provinces, "ProvinceId", "ProvinceName", 1);
             }
             return View(user);
@@ -110,8 +112,6 @@ namespace GOTech.Controllers
         }
 
         // POST
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,FirstName,LastName,PositionId,HiringDate,Address,City,ProvinceId,PostalCode,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser user)

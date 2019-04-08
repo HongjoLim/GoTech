@@ -1,12 +1,11 @@
-﻿/* 
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+/* 
  * Name: Jo Lim
  * Date: Mar 25, 2019
- * Last Modified: Mar 25, 2019
+ * Last Modified: Apr 6, 2019
  * */
-
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GOTech.Models
 {
@@ -24,18 +23,22 @@ namespace GOTech.Models
         public virtual string Description { get; set; }
         public virtual bool Ongoing { get; set; }
         
+        // 1 Project has multiple reviews
         public List<Review> Reviews { get; set; }
 
     }
 
-    /* This class is for the joined table (employee - project) to give a many-to-many relationship between 2 entities
-     * 
+    /* This class is for the joined entities "Employee (ApplicationUser)" & "Project" 
+     * to give a Many-to-Many relationship between 2 entities
      **/
 
     public class EmployeeProject
     {
+        [Key]
         public virtual int Id { get; set; }
-        public virtual int ApplicationUserId { get; set; }
+
+        // ApplicationUserId is a string value
+        public virtual string ApplicationUserId { get; set; }
         public virtual int ProjectId { get; set; }
     
     }

@@ -106,10 +106,14 @@
     <Compile Include="ControllerTest\CustomersControllerTest.cs" />
     <Compile Include="ControllerTest\EmployeesControllerTest.cs" />
     <Compile Include="ControllerTest\PositionsControllerTest.cs" />
+    <Compile Include="ControllerTest\ProjectsControllerTest.cs" />
+    <Compile Include="ControllerTest\HomeControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoutingTest\HomeControllerRoutingTest.cs" />
     <Compile Include="RoutingTest\CustomersControllerRoutingTest.cs" />
     <Compile Include="RoutingTest\EmployeesControllerRoutingTest.cs" />
+    <Compile Include="RoutingTest\ProjectsControllerRoutingTest.cs" />
+    <Compile Include="RoutingTest\PositionsControllerRoutingTest.cs" />
     <Compile Include="Tools\MockingHelper.cs" />
   </ItemGroup>
   <ItemGroup>

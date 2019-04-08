@@ -111,7 +111,7 @@ namespace GOTechUnitTest.RoutingTest
             Assert.AreEqual("Edit", routeData.Values["action"]);
         }
 
-        // https://{application base path}/External/Details/random@google.com
+        // https://{application base path}/External/Edit/random@google.com
         [TestMethod]
         public void CustomerEditGET()
         {
@@ -127,7 +127,7 @@ namespace GOTechUnitTest.RoutingTest
             Assert.AreEqual("Edit", routeData.Values["action"]);
         }
 
-        // https://{application base path}/External/Details/random@google.com
+        // https://{application base path}/External/Edit/random@google.com
         // POST method
         [TestMethod]
         public void CustomerEditPost()
@@ -144,7 +144,7 @@ namespace GOTechUnitTest.RoutingTest
             Assert.AreEqual("Edit", routeData.Values["action"]);
         }
 
-        // https://{application base path}/External/Details/random@google.com
+        // https://{application base path}/External/Delete/random@google.com
         [TestMethod]
         public void CustomerDeleteGET()
         {
@@ -160,7 +160,7 @@ namespace GOTechUnitTest.RoutingTest
             Assert.AreEqual("Delete", routeData.Values["action"]);
         }
 
-        // https://{application base path}/External/Details/random@google.com
+        // https://{application base path}/External/Delete/random@google.com
         // POST method
         [TestMethod]
         public void CustomerDeleteConfirmedPost()
