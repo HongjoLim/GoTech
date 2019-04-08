@@ -15,6 +15,14 @@ namespace GOTech.Models.API
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ReviewBL(){ }
+
+        // DI for unit testing
+        public ReviewBL(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
+
         public void AddReview(Review review)
         {
             db.Reviews.Add(review);
