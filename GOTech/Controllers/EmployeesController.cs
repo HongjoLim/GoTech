@@ -69,8 +69,8 @@ namespace GOTech.Controllers
             try
             {
                 var parsedId = Convert.ToInt32(id);
-                var employees = db.Users.Where(x => x.PositionId == parsedId).ToList();
-                return PartialView("_EmployeesTable", employees);
+                var employees = db.Users.Where(x => x.PositionId == parsedId);
+                return PartialView("_EmployeesTable", employees.Include(x=>x.Position));
             }
             catch (Exception e)
             {
