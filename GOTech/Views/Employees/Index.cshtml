@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<GOTech.Models.ApplicationUser>
 
 @{
+                /**/
 
-    ViewBag.Title = "Our Employees";
+                ViewBag.Title = "Our Employees";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -11,31 +12,60 @@
 <p>
     @Html.ActionLink("Register", "Register", "Account")
 </p>
-<label for="positionId"><b>Select a position</b></label>
-<fieldset>
-    <p>
-        @Html.DropDownList("PositionId", (SelectList)ViewBag.Positions, htmlAttributes: new { @id = "positionId", onchange = "sendPositionId()" })
-    </p>
-</fieldset>
+<form id="myForm">
+    <label for="positionsDropdown"><b>Position</b></label>
+    <select class="form-control" id="positionDropdown" name="positionsDropdown"></select>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Position.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HiringDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
 
-<!-- javascript for Ajax function - when the position is selected, only show employees with selected position-->
-<script>
-    function sendPositionId()
+    @foreach (var item in Model)
     {
-        var id = $('#positionId').val();
-        $.ajax({
-            method: "POST",
-            url: '@Url.Action("GetEmployeesByPositionId", "Employees")',
-            updateTargetId: 'table',
-            data: { id: id },
-            // repopulate the table
-            success: function (data) {
-                $('#table').empty().html(data);
-            }
-        });
-    }
-</script>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Position.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.HiringDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { email = item.Email }) |
+        @Html.ActionLink("Details", "Details", new { email = item.Email }) |
+        @Html.ActionLink("Delete", "Delete", new { email = item.Email })
+    </td>
+</tr>
+}
 
-<div id="table">
-    @Html.Partial("_EmployeesTable", Model)
-</div>
+</table>

@@ -7,9 +7,9 @@ using System.Web.Routing;
 
 /* 
  * Name: Jo Lim
- * Date: Apr 7, 2019
+ * Date: Apr 5, 2019
  * Last Modified: Apr 7, 2019
- * Description: This class unit tests Routing in PositionsController
+ * Description: This class unit tests Routing in CustomersController
  * */
 namespace GOTechUnitTest.RoutingTest
 {
