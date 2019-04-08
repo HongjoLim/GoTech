@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -48,8 +49,33 @@ namespace GOTech.Controllers
         {
             // Find employees among the application users. Employees DO have positionId
             var employees = db.Users.Where(x => x.PositionId != null);
+
+            ViewBag.Positions = new SelectList(db.Positions, "PositionId", "Title");
             
             return View(employees.Include(x=>x.Position));
+        }
+
+        /** This action method is called by Ajax.
+         *  When the admin selects a position from the Dropdown list,
+         *  the Ajax re-populates employees table to show only those who are in the selected position
+         * */
+         [HttpPost]
+        public ActionResult GetEmployeesByPositionId(string id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            try
+            {
+                var parsedId = Convert.ToInt32(id);
+                var employees = db.Users.Where(x => x.PositionId == parsedId).ToList();
+                return PartialView("_EmployeesTable", employees);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         // GET
