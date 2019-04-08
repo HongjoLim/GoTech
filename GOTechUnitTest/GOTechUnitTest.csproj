@@ -103,6 +103,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APITest\UnitTest1.cs" />
     <Compile Include="ControllerTest\CustomersControllerTest.cs" />
     <Compile Include="ControllerTest\EmployeesControllerTest.cs" />
     <Compile Include="ControllerTest\PositionsControllerTest.cs" />
