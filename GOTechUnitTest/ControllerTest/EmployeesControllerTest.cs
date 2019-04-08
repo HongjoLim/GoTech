@@ -70,9 +70,17 @@ namespace GOTechUnitTest.ControllerTest
                 }
             }.AsQueryable();
 
+            var dummyPosition = new Position
+            {
+                PositionId = 1,
+                Title = "Developer"
+            };
+
             _userSet = MockingHelper.Create(dummyUsers);
+            _positionSet = MockingHelper.Create(new List<Position> { dummyPosition }.AsQueryable());
 
             _db.Setup(c => c.Users).Returns(_userSet.Object);
+            _db.Setup(c => c.Positions).Returns(_positionSet.Object);
 
             // ACT
             var result = _controller.Index() as ViewResult;
@@ -99,9 +107,17 @@ namespace GOTechUnitTest.ControllerTest
                 }
             }.AsQueryable();
 
-            _userSet = MockingHelper.Create(dummyUsers);
+            var dummyPosition = new Position
+            {
+                PositionId = 1,
+                Title = "Developer"
+            };
 
+            _userSet = MockingHelper.Create(dummyUsers);
+            _positionSet = MockingHelper.Create(new List<Position> { dummyPosition }.AsQueryable());
+            
             _db.Setup(c => c.Users).Returns(_userSet.Object);
+            _db.Setup(c => c.Positions).Returns(_positionSet.Object);
 
             // ACT
             var result = _controller.Index() as ViewResult;
@@ -112,6 +128,66 @@ namespace GOTechUnitTest.ControllerTest
             // ASSERT
             Assert.AreNotEqual(null, result);
             Assert.AreEqual(0, employees.Count());
+        }
+
+        [TestMethod]
+        public void GetEmployeesByPositionIdWhenIdNull()
+        {
+            // ARRANGE
+            string id = null;
+
+            // ACT
+            var result = _controller.GetEmployeesByPositionId(id);
+ 
+            // ASSERT
+            Assert.AreNotEqual(null, result);
+            Assert.AreEqual(typeof(RedirectToRouteResult), result.GetType());
+        }
+
+        [TestMethod]
+        public void GetEmployeesByPositionIdWhenIdNotNull()
+        {
+            var dummyUsers = new List<ApplicationUser>
+            {
+                // ARRANGE
+                new ApplicationUser
+                {
+                    UserName = "czebahi1@gmail.com",
+                    Email = "czebahi@gmail.com",
+                    PositionId = 1,
+                },
+                new ApplicationUser
+                {
+                    UserName = "czebahi2@gmail.com",
+                    Email = "czebahi2@gmail.com",
+                }
+            }.AsQueryable();
+
+            var dummyPosition = new Position
+            {
+                PositionId = 1,
+                Title = "Developer"
+            };
+
+            _userSet = MockingHelper.Create(dummyUsers);
+            _positionSet = MockingHelper.Create(new List<Position> { dummyPosition }.AsQueryable());
+
+            _db.Setup(c => c.Users).Returns(_userSet.Object);
+            _db.Setup(c => c.Positions).Returns(_positionSet.Object);
+
+            var positionId = dummyPosition.PositionId.ToString();
+
+            // ACT
+            var result = _controller.GetEmployeesByPositionId(positionId);
+            var partialView = result as PartialViewResult;
+
+            // typecast the partial view model
+            var employee = ((IQueryable<ApplicationUser>)partialView.Model).FirstOrDefault();
+
+            // ASSERT
+            Assert.AreEqual(typeof(PartialViewResult), result.GetType());
+            Assert.AreEqual(dummyPosition.PositionId, employee.PositionId);
+
         }
 
         [TestMethod]
