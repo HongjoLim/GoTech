@@ -1,11 +1,25 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "About Us";
 }
-<h2>@ViewBag.Title.</h2>
-<br />
-<br />
-       <h5>This website is for <strong>GOTech</strong> company.
-        Our company builds websites for different companies, hotels, malls and many more.
-        GOTech has a team of developers, salesmen, designers, and managers.
-        They are working on a different project with different complications.
-        </h5>
+<section>
+    <div class="container m-3">
+        <div class="row align-items-center">
+            <div class="col-lg-4 order-lg-2">
+                <div class="p-5">
+                    <img class="img-rounded imgs" src="../Images/project.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-lg-8 order-lg-1">
+                <div class="p-5">
+                    <h2 class="display-4">@ViewBag.Title.</h2>
+                    <p class="message">
+                        This website is for <strong>GOTech</strong> company.
+                        Our company builds websites for different companies, hotels, malls and many more.
+                        GOTech has a team of developers, salesmen, designers, and managers.
+                        They are working on a different project with different complications.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
