@@ -1,4 +1,5 @@
 using GOTech.Controllers;
+using GOTech.Controllers.API;
 using GOTech.Models;
 using GOTech.Models.API;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -43,6 +44,12 @@ namespace GOTech
             container.RegisterType<ProjectsController>(new InjectionConstructor());
 
             RegisterTypes(container);
+
+            // DI for unit testing ReviewsController
+            // The Db Context gets injected into the ReviewBL
+            container.RegisterType<ReviewBL>(new InjectionConstructor());
+            // Then ReviewBL gets injected into the ReviewsController
+            container.RegisterType<ReviewsController>(new InjectionConstructor());
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

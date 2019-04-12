@@ -24,7 +24,9 @@ namespace GOTech
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/one-page-wonder.css",
                       "~/Content/site.css"));
+            
         }
     }
 }
