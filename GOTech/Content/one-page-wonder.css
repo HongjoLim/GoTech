@@ -55,3 +55,27 @@ h6 {
     font-size: 1.6rem;
     font-weight: 700;
 }
+
+.employee-jumbotron {
+    height: 280px;
+    background-image: url("../Images/employee.jpg");
+    background-size: cover;
+}
+
+.project-jumbotron {
+    height: 280px;
+    background-image: url("../Images/project-header.jpg");
+    background-size: cover;
+}
+
+.customer-jumbotron {
+    height: 280px;
+    background-image: url("../Images/customer.jpg");
+    background-size: cover;
+}
+
+.position-jumbotron {
+    height: 280px;
+    background-image: url("../Images/position.jpg");
+    background-size: cover;
+}

@@ -3,8 +3,10 @@
 @{
     ViewBag.Title = "Our customers";
 }
-
-<h2>@ViewBag.Title</h2>
+<div id="employeeHeader">
+    @Html.Partial("_CustomerHeader")
+</div>
+<h2 class="display-4">@ViewBag.Title</h2>
 
 <table class="table">
     <tr>
