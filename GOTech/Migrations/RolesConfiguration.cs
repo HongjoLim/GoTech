@@ -3,7 +3,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 /* 
 * Name: Jo Lim
 * Date: Apr 2, 2019
