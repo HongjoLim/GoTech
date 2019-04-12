@@ -4,7 +4,12 @@
     ViewBag.Title = "Our Project";
 }
 
-<h2>@ViewBag.Title</h2>
+<div id="projectHeader">
+    @Html.Partial("_ProjectsHeader")
+</div>
+
+
+<h2 class="display-4">@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -23,23 +28,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ongoing)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProjectId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProjectId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProjectId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ongoing)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProjectId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProjectId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProjectId })
+            </td>
+        </tr>
+    }
 
 </table>

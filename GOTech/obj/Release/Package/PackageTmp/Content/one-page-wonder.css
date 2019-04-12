@@ -1,0 +1,81 @@
+/*!
+ * Start Bootstrap - One Page Wonder v5.0.4 (https://startbootstrap.com/template-overviews/one-page-wonder)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-one-page-wonder/blob/master/LICENSE)
+ */
+
+body {
+  font-family: 'Lato';
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Catamaran';
+  font-weight: 800 !important;
+}
+.navbar-custom {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+    
+.navbar-nav, .nav-item, .nav-link
+{
+    color : blanchedalmond;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+}
+
+.navbar-brand {
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    letter-spacing: 0.1rem;
+    font-weight: 700;
+}
+
+.jumbotron {
+    height: 600px;
+    background-image: url("../Images/header.jpg");
+    background-size: cover;
+}
+
+.imgs {
+    width: 360px;
+    height: 250px;
+    overflow: hidden;
+}
+
+.message 
+{
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.employee-jumbotron {
+    height: 280px;
+    background-image: url("../Images/employee.jpg");
+    background-size: cover;
+}
+
+.project-jumbotron {
+    height: 280px;
+    background-image: url("../Images/project-header.jpg");
+    background-size: cover;
+}
+
+.customer-jumbotron {
+    height: 280px;
+    background-image: url("../Images/customer.jpg");
+    background-size: cover;
+}
+
+.position-jumbotron {
+    height: 280px;
+    background-image: url("../Images/position.jpg");
+    background-size: cover;
+}

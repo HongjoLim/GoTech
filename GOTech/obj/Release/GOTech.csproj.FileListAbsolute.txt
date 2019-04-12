@@ -194,3 +194,4 @@ C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Release\GOTech.csproj.CoreCom
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Release\GOTech.csproj.CopyComplete
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Release\GOTech.dll
 C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Release\GOTech.pdb
+C:\Users\HONGJO LIM\source\repos\GOTech\GOTech\obj\Release\GOTech.csprojAssemblyReference.cache

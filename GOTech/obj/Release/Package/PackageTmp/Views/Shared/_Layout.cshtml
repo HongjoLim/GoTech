@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GO Technology</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+             @Html.ActionLink("GO Technology", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item">@Html.ActionLink("HOME", "INDEX", "Home")</li>
+                    @*
+        The "Employees", "Customers" will only be seen to "Admin" user
+                    *@
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">@Html.ActionLink("EMPLOYEES", "Index", "Employees")</li>
+                        <li class="nav-item">@Html.ActionLink("CUSTOMERS", "Index", "Customers")</li>
+                        <li class="nav-item">@Html.ActionLink("POSITIONS", "Index", "Positions")</li>
+                    }
+                    @*
+        "Customers" and non-user cannot see "Projects" menu
+                    *@
+                    @if (User.IsInRole("Admin") || User.IsInRole("Employee") || User.IsInRole("Manager"))
+                    {
+                        <li class="nav-item">@Html.ActionLink("PROJECTS", "Index", "Projects")</li>
+                    }
+                    <li class="nav-item">@Html.ActionLink("ABOUT", "About", "Home")</li>
+                    <li class="nav-item">@Html.ActionLink("CONTACT", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer class="py-5 bg-black">
+            <div class="container">
+                <p class="m-0 text-center text-white small">Copyright &copy; GO Technology @DateTime.Now.Year</p>
+            </div>
+            <!-- /.container -->
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src=”~/scripts/jquery.unobtrusive-ajax.min.js”></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
