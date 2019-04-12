@@ -26,9 +26,9 @@ h6 {
 {
     color : blanchedalmond;
     text-transform: uppercase;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    letter-spacing: 0.2rem;
+    letter-spacing: 0.1rem;
 }
 
 .navbar-brand {
@@ -54,4 +54,28 @@ h6 {
 {
     font-size: 1.6rem;
     font-weight: 700;
+}
+
+.employee-jumbotron {
+    height: 280px;
+    background-image: url("../Images/employee.jpg");
+    background-size: cover;
+}
+
+.project-jumbotron {
+    height: 280px;
+    background-image: url("../Images/project-header.jpg");
+    background-size: cover;
+}
+
+.customer-jumbotron {
+    height: 280px;
+    background-image: url("../Images/customer.jpg");
+    background-size: cover;
+}
+
+.position-jumbotron {
+    height: 280px;
+    background-image: url("../Images/position.jpg");
+    background-size: cover;
 }

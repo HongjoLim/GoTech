@@ -4,13 +4,14 @@
     ViewBag.Title = "Edit a project";
 }
 
+
 <h2>@ViewBag.Title</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Project</h4>
         <hr />

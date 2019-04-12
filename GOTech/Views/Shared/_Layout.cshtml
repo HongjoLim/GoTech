@@ -23,6 +23,7 @@
             </div>
             <div class="navbar navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item">@Html.ActionLink("HOME", "INDEX", "Home")</li>
                     @*
         The "Employees", "Customers" will only be seen to "Admin" user
                     *@
@@ -39,7 +40,6 @@
                     {
                         <li class="nav-item">@Html.ActionLink("PROJECTS", "Index", "Projects")</li>
                     }
-                    <li class="nav-item">@Html.ActionLink("HOME", "INDEX", "Home")</li>
                     <li class="nav-item">@Html.ActionLink("ABOUT", "About", "Home")</li>
                     <li class="nav-item">@Html.ActionLink("CONTACT", "Contact", "Home")</li>
                 </ul>

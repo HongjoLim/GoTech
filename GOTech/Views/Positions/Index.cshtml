@@ -4,7 +4,11 @@
     ViewBag.Title = "Positions";
 }
 
-<h2>@ViewBag.Title</h2>
+<div id="employeeHeader">
+    @Html.Partial("_PositionHeader")
+</div>
+
+<h2 class="display-4">@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")

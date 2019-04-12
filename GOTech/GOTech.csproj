@@ -516,6 +516,10 @@
     <Content Include="Views\Customers\Edit.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Employees\_EmployeesTable.cshtml" />
+    <Content Include="Views\Employees\_EmployeesHeader.cshtml" />
+    <Content Include="Views\Projects\_ProjectsHeader.cshtml" />
+    <Content Include="Views\Customers\_CustomerHeader.cshtml" />
+    <Content Include="Views\Positions\_PositionHeader.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
