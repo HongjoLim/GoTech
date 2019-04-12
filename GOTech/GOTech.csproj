@@ -443,6 +443,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\coding.jpg" />
+    <Content Include="Images\computer.jpg" />
+    <Content Include="Images\contact.jpg" />
+    <Content Include="Images\customer.jpg" />
+    <Content Include="Images\employee.jpg" />
+    <Content Include="Images\header.jpg" />
+    <Content Include="Images\java.jpg" />
+    <Content Include="Images\position.jpg" />
+    <Content Include="Images\project-header.jpg" />
+    <Content Include="Images\project.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\GOTechnology - Web Deploy.pubxml" />
@@ -523,7 +533,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
     <Folder Include="Tools\" />
   </ItemGroup>
   <ItemGroup>
